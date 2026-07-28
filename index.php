@@ -1,5 +1,13 @@
 <?php
 
+    // ── Security Headers ─────────────────────────────────────────────────────
+    header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('X-Content-Type-Options: nosniff');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()');
+    header_remove('X-Powered-By');
+
     // Get full server timestamp with GMT(-03:00)
     date_default_timezone_set('America/Sao_Paulo');
     $timestamp = date('Y-m-d H:i:s');
@@ -28,7 +36,7 @@
     <meta name="author" content="CRUZ Advocacia">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.advogadodefesa.com.br/">
+    <link rel="canonical" href="https://advogadodefesa.com.br/">
 
     <!-- Preconnect para recursos externos -->
     <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
@@ -47,8 +55,10 @@
     <!-- Open Graph — WhatsApp, Facebook, Instagram -->
     <meta property="og:title" content="CRUZ Advocacia — Advogado em Jaraguá do Sul/SC">
     <meta property="og:description" content="Soluções jurídicas completas em Direito Trabalhista, Previdenciário, Civil, Bancário e Criminal. +4.000 clientes atendidos. Consulta via WhatsApp.">
-    <meta property="og:image" content="https://www.advogadodefesa.com.br/src/img/CRUZ_SOCIAL_SITE.png">
-    <meta property="og:url" content="https://www.advogadodefesa.com.br/">
+    <meta property="og:image" content="https://advogadodefesa.com.br/src/img/CRUZ_SOCIAL_SITE.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://advogadodefesa.com.br/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="CRUZ Advocacia">
@@ -58,7 +68,7 @@
     <meta name="twitter:site" content="@cruzadvocacia">
     <meta name="twitter:title" content="CRUZ Advocacia — Advogado em Jaraguá do Sul/SC">
     <meta name="twitter:description" content="Soluções jurídicas completas em Direito Trabalhista, Previdenciário, Civil, Bancário e Criminal. +4.000 clientes.">
-    <meta name="twitter:image" content="https://www.advogadodefesa.com.br/src/img/social_media_card.png">
+    <meta name="twitter:image" content="https://advogadodefesa.com.br/src/img/social_media_card.png">
 
     <!-- SEO GOOGLE -->
     <meta name="revisit-after" content="7 days">
@@ -78,6 +88,7 @@
 
     <!-- Meta Tags para MOBILE GERAL -->
     <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#1a1a2e">
 
     <!-- Schema.org JSON-LD — Escritório de Advocacia -->
     <script type="application/ld+json">
@@ -86,9 +97,9 @@
       "@type": "LegalService",
       "name": "CRUZ Advocacia",
       "alternateName": "Cruz Advogados Associados",
-      "url": "https://www.advogadodefesa.com.br",
-      "logo": "https://www.advogadodefesa.com.br/src/img/LOGO.png",
-      "image": "https://www.advogadodefesa.com.br/src/img/CRUZ_SOCIAL_SITE.png",
+      "url": "https://advogadodefesa.com.br",
+      "logo": "https://advogadodefesa.com.br/src/img/LOGO.png",
+      "image": "https://advogadodefesa.com.br/src/img/CRUZ_SOCIAL_SITE.png",
       "telephone": "+554732731422",
       "email": "mcruz.advogados@gmail.com",
       "description": "Escritório de advocacia referência em Jaraguá do Sul/SC com +4.000 clientes atendidos e R$12,5 milhões recuperados. Especialistas em Direito Trabalhista, Previdenciário, Civil, Bancário e Criminal.",
@@ -105,7 +116,10 @@
         "latitude": -26.4939913,
         "longitude": -49.0811204
       },
-      "areaServed": { "@type": "City", "name": "Jaraguá do Sul" },
+      "areaServed": [
+        { "@type": "City", "name": "Jaraguá do Sul" },
+        { "@type": "State", "name": "Santa Catarina" }
+      ],
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",

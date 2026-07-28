@@ -1,0 +1,49 @@
+Options -Indexes
+
+# ── Security Headers ──────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    # HSTS — forçar HTTPS por 1 ano, incluindo subdomínios
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Bloquear iframes de outros domínios (clickjacking)
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Bloquear MIME-type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer: enviar origem apenas em HTTPS same-origin
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy — desativar recursos sensíveis não usados
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://maps.gstatic.com https://maps.googleapis.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; frame-src https://www.google.com https://maps.google.com.br; object-src 'none'; base-uri 'self';"
+
+    # Remover header X-Powered-By
+    Header unset X-Powered-By
+</IfModule>
+
+RewriteEngine On
+
+# Redirecionar www → sem www (canonical)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# Redirecionar /mapa → home (página vazia no CMS)
+RewriteRule ^mapa/?$ / [R=301,L]
+
+# Servir arquivos PHP reais diretamente (subpáginas com SEO)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Servir diretórios reais diretamente
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Clean URLs → PHP files (se existirem)
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^([a-z0-9_-]+)/?$ /$1.php [L,NC]
+
+# Rota interna CMS
+RewriteRule ^ index.php [L]

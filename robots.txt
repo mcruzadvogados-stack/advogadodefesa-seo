@@ -1,9 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /src/partials/
 
-# Bloquear acesso a pastas internas desnecessárias
-Disallow: /src/css/
-Disallow: /src/js/
-
-# Sitemap
 Sitemap: https://www.advogadodefesa.com.br/sitemap.xml
