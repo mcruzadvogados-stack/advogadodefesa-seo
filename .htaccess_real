@@ -1,0 +1,24 @@
+RewriteEngine on
+
+# Redirecionar www para sem-www (HTTPS)
+RewriteCond %{HTTP_HOST} ^www\.advogadodefesa\.com\.br [NC]
+RewriteRule ^(.*)$ https://advogadodefesa.com.br/ [R=301,L]
+
+# ── Clean URLs (sem extensão .php) ──────────────────────────────────────
+RewriteRule ^contato/?$        /contato.php        [L,NC]
+RewriteRule ^trabalhista/?$    /trabalhista.php    [L,NC]
+RewriteRule ^previdenciario/?$ /previdenciario.php [L,NC]
+RewriteRule ^inventario/?$     /inventario.php     [L,NC]
+RewriteRule ^bancario/?$       /bancario.php       [L,NC]
+RewriteRule ^criminal/?$       /criminal.php       [L,NC]
+RewriteRule ^civil/?$          /civil.php          [L,NC]
+
+# ── Redirects externos (atalhos úteis) ──────────────────────────────────
+RewriteRule ^processo$  https://portaldeservicos.pdpj.jus.br/consulta  [R=301,L]
+RewriteRule ^trabalhe$  https://forms.gle/ZsPiUKxkwDZ5iHDa7             [R=301,L]
+RewriteRule ^mapa$      https://share.google/k9Py2p5u7c4vzhiL2          [R=301,L]
+
+# Regras originais do site
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=
