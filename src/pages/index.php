@@ -684,7 +684,7 @@
       var target   = +el.dataset.target;
       var prefix   = el.dataset.prefix || '';
       var suffix   = el.dataset.suffix || '';
-      var duration = 5000;
+      var duration = 10000;
       var start    = null;
       function step(ts) {
         if (!start) start = ts;
