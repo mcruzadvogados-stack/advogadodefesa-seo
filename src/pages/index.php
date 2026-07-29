@@ -198,33 +198,32 @@
     font-size: 1.08em;
   }
 
-  /* ── HERO VIDEO WIDGET (fixed, bottom-right) ────────── */
+  /* ── HERO VIDEO — lado direito do section_home ───────── */
   .hero_video_wrap {
-    position: fixed;
-    bottom: 122px;
-    right: 50px;
-    width: 200px;
-    border-radius: 15px;
+    flex: 1;
+    align-self: center;
+    position: relative;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0,0,0,.62);
-    z-index: 998;
+    box-shadow: 0 8px 40px rgba(0,0,0,.5);
     animation: heroSlideUp .8s .5s cubic-bezier(.22,1,.36,1) both;
+    max-width: 480px;
   }
   .hero_video_wrap::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgba(26,26,46,.3) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(26,26,46,.3) 0%, rgba(26,26,46,.05) 100%);
     pointer-events: none;
   }
   .hero_video {
     display: block;
     width: 100%;
     height: auto;
-    opacity: .78;
+    opacity: .72;
     object-fit: cover;
   }
-  @media (max-width: 640px) {
+  @media (max-width: 900px) {
     .hero_video_wrap { display: none; }
   }
   </style>                                     
@@ -242,13 +241,6 @@
                                                                   
       <!-- AUTOLOAD S7VEN -->                                                                                                                                                                                   
       <?php include('./autoload_seven.php'); ?>                   
-          <div class="hero_video_wrap" aria-hidden="true">
-              <video class="hero_video" autoplay muted loop playsinline preload="metadata"
-                  poster="./src/img/hero_poster.jpg">
-                  <source src="./src/video/hero.webm" type="video/webm">
-                  <source src="./src/video/hero.mp4" type="video/mp4">
-              </video>
-          </div>
                                                                                                                                                                                                                 
       <a class="whatsapp" href="https://api.whatsapp.com/send?phone=554732731422&text=Ol%C3%A1,%20gostaria%20de%20falar%20com%20um%20advogado." target="_blank" rel="noopener noreferrer" aria-label="Atendimento 
   via WhatsApp">                                                                                                                                                                                                
@@ -294,6 +286,13 @@
                   <h4>Falar com um advogado</h4>                                                                                                                                                                
               </a>
           </div>                                                                                                                                                                                                
+          <div class="hero_video_wrap" aria-hidden="true">
+              <video class="hero_video" autoplay muted loop playsinline preload="metadata"
+                  poster="./src/img/hero_poster.jpg">
+                  <source src="./src/video/hero.webm" type="video/webm">
+                  <source src="./src/video/hero.mp4" type="video/mp4">
+              </video>
+          </div>
           <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
       </section>                                                                                                                                                                                                
                                                                                                                                                                                                                 
