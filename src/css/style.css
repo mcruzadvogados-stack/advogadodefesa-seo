@@ -292,8 +292,8 @@ body .section_home{
     /* Desktop: flex item à direita do texto */
     position: relative;
     order: 2;
-    flex: 1;
-    max-width: 500px;
+    flex: 1.5;
+    max-width: 700px;
     align-self: center;
     border-radius: 16px;
     box-shadow: 0 8px 40px rgba(0,0,0,.55);
