@@ -207,7 +207,7 @@
       <section class="section_home" id="section_home">
           <div class="home_box">                                                                                                                                                                                
               <h1>O Melhor Advogado é aquele que apresenta soluções jurídicas com excelência e dedicação e resolve o seu problema.</h1>
-              <h4>Buscar os seus direitos é o nosso trabalho e a nossa missão através da excelência e dedicação dos nossos advogados especialistas em:</h4>                                                     
+              <h4>Buscar seu direito é nosso trabalho, com advogados especialistas em diversas áreas</h4>                                                     
               <h5>                                                                                                                                                                                              
                   • Direito Trabalhista<br>                                                                                                                                                                     
                   • Direito Previdenciário<br>                                                                                                                                                                  
