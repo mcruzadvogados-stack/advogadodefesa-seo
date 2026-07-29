@@ -1,0 +1,17 @@
+{
+  "host": "advogadodefesa.com.br",
+  "key": "2068054de8e846ceba7ce1dd561f5546",
+  "keyLocation": "https://advogadodefesa.com.br/2068054de8e846ceba7ce1dd561f5546.txt",
+  "submittedAt": "2026-07-29",
+  "engines": ["bing", "api.indexnow.org", "yandex"],
+  "urlList": [
+    "https://advogadodefesa.com.br/",
+    "https://advogadodefesa.com.br/trabalhista",
+    "https://advogadodefesa.com.br/previdenciario",
+    "https://advogadodefesa.com.br/civil",
+    "https://advogadodefesa.com.br/criminal",
+    "https://advogadodefesa.com.br/bancario",
+    "https://advogadodefesa.com.br/inventario",
+    "https://advogadodefesa.com.br/contato"
+  ]
+}
