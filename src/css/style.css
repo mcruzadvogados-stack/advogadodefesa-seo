@@ -1138,3 +1138,55 @@ footer .footer_bottom{
     font-size: 1.4rem;
     font-weight: 300;
 }
+/* ── SECTION DIFERENCIAIS ───────────────────────────────────────────── */
+.section_diferenciais {
+    background: #1a1a2e;
+    padding: 80px 40px;
+    text-align: center;
+}
+.section_diferenciais .diferenciais_content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.section_diferenciais h2 {
+    font-size: 2rem;
+    color: #c8a96e !important;
+    margin-bottom: 20px;
+}
+.section_diferenciais > .diferenciais_content > p {
+    font-size: 1.05rem;
+    color: #c8a96e !important;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    line-height: 1.75;
+}
+.diferenciais_grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.diferencial_item {
+    background: rgba(200,169,110,.08);
+    border: 1px solid rgba(200,169,110,.25);
+    border-radius: 12px;
+    padding: 35px 30px;
+    flex: 1 1 260px;
+    max-width: 320px;
+}
+.diferencial_item i {
+    font-size: 2.2rem;
+    color: #c8a96e;
+    margin-bottom: 16px;
+}
+.diferencial_item h4 {
+    font-size: 1.1rem;
+    color: #c8a96e !important;
+    margin-bottom: 10px;
+}
+.diferencial_item p {
+    font-size: 0.9rem;
+    color: #c8a96e !important;
+    line-height: 1.6;
+    opacity: 0.85;
+}
