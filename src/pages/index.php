@@ -717,23 +717,5 @@
     document.querySelectorAll('.counter').forEach(function(el) { observer.observe(el); });
   })();
   </script>
-
-  <script>
-  /* hero video — fallback para browsers sem suporte a object-fit em video */
-  (function(){
-    var vid = document.querySelector('.hero_bg_video');
-    if(!vid) return;
-    function fit(){
-      vid.style.width  = window.innerWidth  + 'px';
-      vid.style.height = window.innerHeight + 'px';
-      vid.style.top    = '0';
-      vid.style.left   = '0';
-    }
-    fit();
-    setTimeout(fit, 100);
-    window.addEventListener('resize', fit);
-    window.addEventListener('orientationchange', function(){ setTimeout(fit, 300); });
-  })();
-  </script>
 </body>                                                         
   </html>
