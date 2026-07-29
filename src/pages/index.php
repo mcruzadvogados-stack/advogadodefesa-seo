@@ -677,36 +677,44 @@
   <script>
   (function(){
     function fmt(n, prefix, suffix) {
-      var s = Math.round(n).toLocaleString('pt-BR');
-      return prefix + s + suffix;
+      return prefix + Math.round(n).toLocaleString('pt-BR') + suffix;
     }
     function animateCounter(el) {
-      var target   = +el.dataset.target;
-      var prefix   = el.dataset.prefix || '';
-      var suffix   = el.dataset.suffix || '';
-      var duration = 10000;
-      var start    = null;
-      function step(ts) {
+      var target  = +el.dataset.target;
+      var prefix  = el.dataset.prefix || '';
+      var suffix  = el.dataset.suffix || '';
+      var phase1End    = target - 5;   // para nos últimos 5
+      var phase1Ms     = 5000;         // primeiros 5 segundos
+      var start        = null;
+
+      // Fase 1: sobe de 0 até (target - 5) em 5 segundos
+      function phase1(ts) {
         if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var ease = progress; // linear — sobe naturalmente segundo a segundo
-        el.textContent = fmt(ease * target, prefix, suffix);
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = fmt(target, prefix, suffix);
+        var p = Math.min((ts - start) / phase1Ms, 1);
+        el.textContent = fmt(p * phase1End, prefix, suffix);
+        if (p < 1) { requestAnimationFrame(phase1); }
+        else        { startPhase2(phase1End); }
       }
-      requestAnimationFrame(step);
+
+      // Fase 2: +1 por segundo durante 5 segundos
+      function startPhase2(current) {
+        var n = Math.round(current);
+        var timer = setInterval(function() {
+          n++;
+          el.textContent = fmt(n, prefix, suffix);
+          if (n >= target) clearInterval(timer);
+        }, 1000);
+      }
+
+      requestAnimationFrame(phase1);
     }
+
     var observer = new IntersectionObserver(function(entries, obs) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          obs.unobserve(entry.target);
-        }
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); }
       });
     }, { threshold: 0.4 });
-    document.querySelectorAll('.counter').forEach(function(el) {
-      observer.observe(el);
-    });
+    document.querySelectorAll('.counter').forEach(function(el) { observer.observe(el); });
   })();
   </script>
 
