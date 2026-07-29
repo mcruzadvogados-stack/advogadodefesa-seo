@@ -197,6 +197,52 @@
     font-weight: 700;
     font-size: 1.08em;
   }
+
+  /* ── HERO VIDEO LAYOUT ──────────────────────────────── */
+  .section_home { overflow: hidden; }
+  .home_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .home_box { flex: 0 0 52%; }
+  .hero_video_wrap {
+    flex: 0 0 44%;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,.45);
+    animation: heroSlideUp .8s .5s cubic-bezier(.22,1,.36,1) both;
+  }
+  .hero_video_wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,26,46,.35) 0%, rgba(26,26,46,.1) 100%);
+    pointer-events: none;
+    border-radius: 16px;
+  }
+  .hero_video {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: .72;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+  @media (max-width: 900px) {
+    .home_inner { flex-direction: column; padding: 0 20px; gap: 24px; }
+    .home_box, .hero_video_wrap { flex: unset; width: 100%; }
+    .hero_video_wrap { max-width: 480px; margin: 0 auto; }
+  }
+  @media (max-width: 640px) {
+    .hero_video_wrap { display: none; }
+  }
   </style>                                     
 
       <!-- WebSite + FAQPage JSON-LD -->
@@ -242,6 +288,7 @@
                                                                   
       <!-- SECTION HOME -->
       <section class="section_home" id="section_home">
+          <div class="home_inner">
           <div class="home_box">                                                                                                                                                                                
               <h1 class="h1_hero"><span class="h1_linha h1_l1">O Melhor Advogado</span><span class="h1_linha h1_l2">é aquele que apresenta soluções jurídicas</span><span class="h1_linha h1_l3">com excelência e dedicação</span><span class="h1_linha h1_l4 h1_cta">e resolve o seu problema.</span></h1>
               <h4>Buscar seu direito é nosso trabalho, com advogados especialistas em diversas áreas</h4>                                                     
@@ -257,6 +304,14 @@
                   <h4>Falar com um advogado</h4>                                                                                                                                                                
               </a>
           </div>                                                                                                                                                                                                
+          <div class="hero_video_wrap" aria-hidden="true">
+              <video class="hero_video" autoplay muted loop playsinline preload="metadata"
+                  poster="./src/img/hero_poster.jpg">
+                  <source src="./src/video/hero.webm" type="video/webm">
+                  <source src="./src/video/hero.mp4" type="video/mp4">
+              </video>
+          </div>
+          </div><!-- /home_inner -->
           <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
       </section>                                                                                                                                                                                                
                                                                                                                                                                                                                 
