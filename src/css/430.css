@@ -225,12 +225,11 @@
         box-shadow: 0 0 10px var(--gold-light);
     }
 
-            /* SECTION HOME ----------------------------------------------------------------------------------*/
+                /* SECTION HOME ----------------------------------------------------------------------------------*/
     body .section_home{
         position: relative;
         width: 100vw;
-        height: 100svh;
-        min-height: 100vh;
+        height: 100vh;
         overflow: hidden;
         background: #0d0d1a;
         display: flex;
@@ -243,15 +242,17 @@
     .hero_bg_video {
         display: block;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        /* Portrait: escala pela altura, largura proporcional ao ratio do video */
+        top: 0;
+        left: 0;
+        width: 100vw;
         height: 100vh;
-        width: calc(100vh * (864 / 496));
-        transform: translate(-50%, -50%);
+        object-fit: cover;
+        object-position: center center;
         opacity: .42;
         z-index: 0;
         pointer-events: none;
+        max-width: none !important;
+        max-height: none !important;
     }
     .hero_bg_overlay {
         position: absolute;
@@ -296,11 +297,7 @@
         text-align: center;
         width: 100%;
     }
-    .home_box .btn_home{
-        padding: 8px 16px;
-        border-radius: 5px;
-        margin-top: 4px;
-    }
+    .home_box .btn_home{ padding: 8px 16px; margin-top: 4px; }
     .btn_home h4{ font-size: 1.05rem; }
     .section_home .fa-angle-down{ display: none; }
 

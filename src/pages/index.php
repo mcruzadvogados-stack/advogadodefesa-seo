@@ -719,43 +719,20 @@
   </script>
 
   <script>
-  /* hero video bg — resize robusto para portrait/landscape em qualquer device */
+  /* hero video — fallback para browsers sem suporte a object-fit em video */
   (function(){
-    var RATIO = 864 / 496; /* aspect ratio do video */
+    var vid = document.querySelector('.hero_bg_video');
+    if(!vid) return;
     function fit(){
-      var vid = document.querySelector('.hero_bg_video');
-      if(!vid) return;
-      var vw = window.innerWidth;
-      var vh = window.innerHeight;
-      var sw = vw / vh; /* screen ratio */
-      var w, h, t, l;
-      if(sw >= RATIO){
-        /* landscape ou wide desktop: escala pela largura */
-        w = vw;
-        h = Math.ceil(vw / RATIO);
-        t = Math.floor((vh - h) / 2);
-        l = 0;
-      } else {
-        /* portrait (mobile vertical): escala pela altura */
-        h = vh;
-        w = Math.ceil(vh * RATIO);
-        t = 0;
-        l = Math.floor((vw - w) / 2);
-      }
-      vid.style.width  = w + 'px';
-      vid.style.height = h + 'px';
-      vid.style.top    = t + 'px';
-      vid.style.left   = l + 'px';
+      vid.style.width  = window.innerWidth  + 'px';
+      vid.style.height = window.innerHeight + 'px';
+      vid.style.top    = '0';
+      vid.style.left   = '0';
     }
-    /* roda imediatamente e após delays para garantir render no iOS */
     fit();
-    setTimeout(fit, 50);
-    setTimeout(fit, 300);
+    setTimeout(fit, 100);
     window.addEventListener('resize', fit);
-    window.addEventListener('orientationchange', function(){
-      setTimeout(fit, 200);
-      setTimeout(fit, 600);
-    });
+    window.addEventListener('orientationchange', function(){ setTimeout(fit, 300); });
   })();
   </script>
 </body>                                                         

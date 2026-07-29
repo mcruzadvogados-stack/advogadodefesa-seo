@@ -225,68 +225,80 @@
         box-shadow: 0 0 10px var(--gold-light);
     }
 
-            /* SECTION HOME ----------------------------------------------------------------------------------*/
+                /* SECTION HOME ----------------------------------------------------------------------------------*/
     body .section_home{
         position: relative;
         width: 100vw;
-        height: 100svh;
-        min-height: 100vh;
+        height: 100vh;
         overflow: hidden;
         background: #0d0d1a;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 90px 8% 20px;
+        padding: 80px 6% 20px;
         box-sizing: border-box;
     }
     .hero_bg_video {
         display: block;
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 0;
+        left: 0;
+        width: 100vw;
         height: 100vh;
-        width: calc(100vh * (864 / 496));
-        transform: translate(-50%, -50%);
+        object-fit: cover;
+        object-position: center center;
         opacity: .42;
         z-index: 0;
         pointer-events: none;
+        max-width: none !important;
+        max-height: none !important;
     }
     .hero_bg_overlay {
         position: absolute;
         inset: 0;
-        background: rgba(13,13,26,.50);
+        background: rgba(13,13,26,.60);
         z-index: 1;
         pointer-events: none;
     }
     .section_home .home_box{
         position: relative;
         z-index: 2;
-        width: 90%;
+        width: 100%;
         height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 16px;
+        gap: 12px;
     }
     .home_box h1{
-        font-size: 2.1rem;
+        color: white;
+        font-size: 1.75rem;
         letter-spacing: .5px;
         text-align: center;
         line-height: 1.3;
     }
     .h1_hero { gap: 2px; }
     .home_box h4{
-        font-size: 1.25rem;
+        color: white;
+        font-weight: 300;
+        font-size: 1.05rem;
+        letter-spacing: .5px;
         line-height: 1.4;
         text-align: center;
     }
     .home_box h5{
-        font-size: 1.1rem;
+        color: var(--gold-light);
+        font-size: 0.95rem;
+        font-weight: 300;
+        letter-spacing: .5px;
         line-height: 1.5;
         text-align: center;
+        width: 100%;
     }
+    .home_box .btn_home{ padding: 8px 16px; margin-top: 4px; }
+    .btn_home h4{ font-size: 1.05rem; }
     .section_home .fa-angle-down{ display: none; }
 
     /* SECTION SOBRE ----------------------------------------------------------------------------------*/
