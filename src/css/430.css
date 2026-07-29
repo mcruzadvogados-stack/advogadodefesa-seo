@@ -225,102 +225,69 @@
         box-shadow: 0 0 10px var(--gold-light);
     }
 
-    /* SECTION HOME ----------------------------------------------------------------------------------*/
+        /* SECTION HOME ----------------------------------------------------------------------------------*/
     body .section_home{
         position: relative;
         width: 100vw;
-        height: 100vh;
+        height: 100svh; /* svh = small viewport height — mais confiavel no iOS */
+        min-height: 100vh;
         overflow: hidden;
-        background: #0d0d1a;
+        /* Poster como fundo no mobile — sem bugs de video sizing */
+        background: linear-gradient(rgba(13,13,26,.60), rgba(13,13,26,.60)),
+                    url('../img/hero_poster.jpg') center/cover no-repeat;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0 5%;
+        padding: 80px 6% 20px; /* 80px topo para deslocar do header fixo */
+        box-sizing: border-box;
     }
-    
-    .hero_bg_overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(13,13,26,.65);
-        z-index: 1;
-        pointer-events: none;
-    }
-    .section_home .home_box {
+    .hero_bg_video { display: none; } /* oculta video no mobile */
+    .hero_bg_overlay { display: none; } /* overlay ja esta no gradient acima */
+
+    .section_home .home_box{
         position: relative;
         z-index: 2;
-    }
-    .section_home .home_box{
-        width: 80%;
-        height: 100%;
+        width: 100%;
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 30px;
+        gap: 14px;
     }
     .home_box h1{
         color: white;
-        font-size: 2.4rem;
-        letter-spacing: 1px;
+        font-size: 1.8rem;
+        letter-spacing: .5px;
         text-align: center;
+        line-height: 1.3;
     }
+    .h1_hero { gap: 2px; }
     .home_box h4{
         color: white;
         font-weight: 300;
-        font-size: 1.4rem;
-        letter-spacing: 1px;
-        line-height: 20px;
+        font-size: 1.1rem;
+        letter-spacing: .5px;
+        line-height: 1.4;
         text-align: center;
     }
     .home_box h5{
         color: var(--gold-light);
-        font-size: 1.4rem;
+        font-size: 1rem;
         font-weight: 300;
-        letter-spacing: 1px;
-        line-height: 20px;
+        letter-spacing: .5px;
+        line-height: 1.5;
         text-align: center;
         width: 100%;
     }
-
     .home_box .btn_home{
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 18px;
-        background-color: var(--gold-dark);
-        color: white;
+        padding: 8px 16px;
         border-radius: 5px;
-        border: 1px solid var(--gold-light);
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 150ms ease-in-out;
+        margin-top: 4px;
     }
-    .btn_home h4{
-        font-size: 1.4rem;
-        letter-spacing: 0;
-    }
-    .btn_home:hover{
-        box-shadow: 0 0 10px var(--gold-light);
-    }
-    .section_home .fa-angle-down{
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        font-size: 2.8rem;
-        color: white;
-        animation: homeArrowAnim 1s linear infinite;
-    }
-    @keyframes homeArrowAnim {
-        50%{
-            bottom: 10px;
-        }
-        100%{
-            bottom: 20px;
-        }
-    }
+    .btn_home h4{ font-size: 1.1rem; }
+    .section_home .fa-angle-down{ display: none; }
 
     /* SECTION SOBRE ----------------------------------------------------------------------------------*/
     body .section_sobre{
