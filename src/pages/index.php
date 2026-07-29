@@ -160,6 +160,43 @@
           color: #1a1a2e !important;
       }                    
        .section_home h1, .section_home h4, .section_home h5 { color: #c8a96e !important; }
+  /* ── H1 HERO ANIMATION ──────────────────────────────── */
+  @keyframes heroSlideUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroGlow {
+    0%, 100% { text-shadow: 0 0 0px transparent; }
+    50%       { text-shadow: 0 0 18px rgba(200,169,110,.55); }
+  }
+  @keyframes heroCtaPulse {
+    0%, 100% { color: #c8a96e; letter-spacing: 0; }
+    50%       { color: #f0d090; letter-spacing: .5px; }
+  }
+  .h1_hero {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .h1_linha {
+    display: block;
+    opacity: 0;
+    animation: heroSlideUp .65s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .h1_l1 { animation-delay: .1s; font-size: 1.15em; }
+  .h1_l2 { animation-delay: .4s; }
+  .h1_l3 {
+    animation-delay: .7s;
+    animation: heroSlideUp .65s .7s cubic-bezier(.22,1,.36,1) forwards,
+               heroGlow 2.8s 1.4s ease-in-out infinite;
+  }
+  .h1_cta {
+    animation-delay: 1s;
+    animation: heroSlideUp .65s 1s cubic-bezier(.22,1,.36,1) forwards,
+               heroCtaPulse 2.5s 1.7s ease-in-out infinite;
+    font-weight: 700;
+    font-size: 1.08em;
+  }
   </style>                                     
 
       <!-- WebSite + FAQPage JSON-LD -->
@@ -206,7 +243,7 @@
       <!-- SECTION HOME -->
       <section class="section_home" id="section_home">
           <div class="home_box">                                                                                                                                                                                
-              <h1>O Melhor Advogado é aquele que apresenta soluções jurídicas com excelência e dedicação e resolve o seu problema.</h1>
+              <h1 class="h1_hero"><span class="h1_linha h1_l1">O Melhor Advogado</span><span class="h1_linha h1_l2">é aquele que apresenta soluções jurídicas</span><span class="h1_linha h1_l3">com excelência e dedicação</span><span class="h1_linha h1_l4 h1_cta">e resolve o seu problema.</span></h1>
               <h4>Buscar seu direito é nosso trabalho, com advogados especialistas em diversas áreas</h4>                                                     
               <h5>                                                                                                                                                                                              
                   • Direito Trabalhista<br>                                                                                                                                                                     
