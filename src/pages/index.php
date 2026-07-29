@@ -435,15 +435,15 @@
               <br>
               <div class="exp_infos">                                                                                                                                                                           
                   <div class="exp_info">                                                                                                                                                                        
-                      <h1>+4.000</h1>
+                      <h1><span class="counter" data-target="4000" data-prefix="+" data-suffix="">+4.000</span></h1>
                       <h4>clientes atendidos</h4>                                                                                                                                                               
                   </div>                                                                                                                                                                                        
                   <div class="exp_info">
-                      <h1>+4.000</h1>                                                                                                                                                                           
+                      <h1><span class="counter" data-target="4000" data-prefix="+" data-suffix="">+4.000</span></h1>
                       <h4>casos solucionados</h4>                                                                                                                                                               
                   </div>
                   <div class="exp_info">                                                                                                                                                                        
-                      <h1>+ R$ 12.500.000</h1>                    
+                      <h1><span class="counter" data-target="12500000" data-prefix="+ R$ " data-suffix="">+ R$ 12.500.000</span></h1>
                       <h4>em valores ganhos a favor de nossos clientes</h4>                                                                                                                                     
                   </div>                                                                                                                                                                                        
               </div>                                                                                                                                                                                            
@@ -673,5 +673,42 @@
   a=document.createElement('a');a.href='https://api.whatsapp.com/send?phone=554732731422&text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20um%20advogado.';a.target='_blank';a.rel='noopener                     
   noreferrer';a.innerHTML='<i class="fa-brands fa-whatsapp"></i>';a.style.cssText='position:fixed;bottom:24px;right:24px;z-index:99999;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;
   align-items:center;justify-content:center;color:white;font-size:28px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3);';document.body.appendChild(a);});</script>                       
-  </body>                                                         
+  
+  <script>
+  (function(){
+    function fmt(n, prefix, suffix) {
+      var s = Math.round(n).toLocaleString('pt-BR');
+      return prefix + s + suffix;
+    }
+    function animateCounter(el) {
+      var target   = +el.dataset.target;
+      var prefix   = el.dataset.prefix || '';
+      var suffix   = el.dataset.suffix || '';
+      var duration = 2000;
+      var start    = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        el.textContent = fmt(ease * target, prefix, suffix);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(target, prefix, suffix);
+      }
+      requestAnimationFrame(step);
+    }
+    var observer = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.counter').forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+  </script>
+
+</body>                                                         
   </html>
