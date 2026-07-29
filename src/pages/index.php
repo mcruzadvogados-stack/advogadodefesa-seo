@@ -443,7 +443,7 @@
                       <h4>casos solucionados</h4>                                                                                                                                                               
                   </div>
                   <div class="exp_info">                                                                                                                                                                        
-                      <h1><span class="counter" data-target="12500000" data-prefix="+ R$ " data-suffix="">+ R$ 12.500.000</span></h1>
+                      <h1><span class="counter" data-target="15000000" data-prefix="+ R$ " data-suffix="">+ R$ 15.000.000</span></h1>
                       <h4>em valores ganhos a favor de nossos clientes</h4>                                                                                                                                     
                   </div>                                                                                                                                                                                        
               </div>                                                                                                                                                                                            
@@ -684,12 +684,12 @@
       var target   = +el.dataset.target;
       var prefix   = el.dataset.prefix || '';
       var suffix   = el.dataset.suffix || '';
-      var duration = 2000;
+      var duration = 5000;
       var start    = null;
       function step(ts) {
         if (!start) start = ts;
         var progress = Math.min((ts - start) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        var ease = progress; // linear — sobe naturalmente segundo a segundo
         el.textContent = fmt(ease * target, prefix, suffix);
         if (progress < 1) requestAnimationFrame(step);
         else el.textContent = fmt(target, prefix, suffix);
