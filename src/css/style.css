@@ -289,20 +289,26 @@ body .section_home{
 }
 
 .hero_bg_video {
-    position: absolute;
-    top: 0; left: 0;
-    opacity: .38;
-    z-index: 0;
+    /* Desktop: flex item à direita do texto */
+    position: relative;
+    order: 2;
+    flex: 1;
+    max-width: 500px;
+    align-self: center;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.55);
+    opacity: .78;
+    z-index: 2;
     pointer-events: none;
+    width: 100%;
+    height: auto;
+    animation: heroSlideUp .8s .5s cubic-bezier(.22,1,.36,1) both;
 }
 .hero_bg_overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(100deg, rgba(13,13,26,.75) 40%, rgba(13,13,26,.25) 100%);
-    z-index: 1;
-    pointer-events: none;
+    display: none; /* overlay não necessário no desktop com video ao lado */
 }
 .section_home .home_box {
+    order: 1;
     position: relative;
     z-index: 2;
 }
