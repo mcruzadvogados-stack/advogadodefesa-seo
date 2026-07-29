@@ -13,10 +13,6 @@
         font-size: 2.6rem;
     }
 
-
-
-
-
     /* HEADER ----------------------------------------------------------------------------------*/
     body header{
         position: fixed;
@@ -105,10 +101,6 @@
         box-shadow: 0 0 10px var(--gold-light);
     }
 
-
-
-
-
     /* SECTION HOME ----------------------------------------------------------------------------------*/
     body .section_home{
         position: relative;
@@ -120,20 +112,7 @@
         flex-direction: row;
         padding: 0 5%;
     }
-    .hero_bg_video {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        transform: translate(-50%, -50%);
-        object-fit: cover;
-        opacity: .38;
-        z-index: 0;
-        pointer-events: none;
-    }
+    
 
     .section_home .home_box{
         width: 40%;
@@ -203,10 +182,6 @@
         }
     }
 
-
-
-
-
     /* SECTION SOBRE ----------------------------------------------------------------------------------*/
     body .section_sobre{
         width: 100vw;
@@ -258,8 +233,6 @@
         border-bottom: 4px solid var(--gold-dark);
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.623);
     }
-
-
 
     /* SECTION ESPECIALIDADES ----------------------------------------------------------------------------------*/
     body .section_especialidades{
@@ -402,9 +375,6 @@
         opacity: 1;
     }
 
-
-
-
     /* BANNER ----------------------------------------------------------------------------------*/
     body .banner{
         width: 100vw;
@@ -424,9 +394,6 @@
         color: var(--gold-light);
         font-size: 2.0rem;
     }
-
-
-
 
     /* SECTION EXPERIÊNCIA ----------------------------------------------------------------------------------*/
     body .section_experiencia{
@@ -512,10 +479,6 @@
         border-bottom: 4px solid var(--gold-dark);
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.623);
     }
-
-
-
-
 
     /* SECTION CONTATOS ----------------------------------------------------------------------------------*/
     body .section_contatos{
@@ -704,11 +667,6 @@
         background-color: var(--var);
     }
 
-
-
-
-
-
     /* SECTION ENDEREÇO ----------------------------------------------------------------------------------*/
     body .section_endereco{
         width: 100vw;
@@ -809,7 +767,6 @@
         background-color: var(--var);
     }
 
-
     .section_endereco .endereco_right{
         width: 60%;
         height: 100%;
@@ -832,11 +789,6 @@
         height: 98%;
         border-radius: 20px;
     }
-
-
-
-
-
 
     /* BANNER DEPOIMENTOS ----------------------------------------------------------------------------------*/
     body .banner_depoimentos{
@@ -882,9 +834,6 @@
         width: 98%;
         height: auto;
     }
-
-
-
 
     /* FOOTER ----------------------------------------------------------------------------------*/
     body footer{

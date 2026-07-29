@@ -718,5 +718,34 @@
   })();
   </script>
 
+
+  <script>
+  /* resize hero video — garante cobertura total em qualquer tela/orientacao */
+  (function(){
+    var vid = document.querySelector('.hero_bg_video');
+    var box = document.querySelector('.section_home');
+    if(!vid || !box) return;
+    function fit(){
+      var bw = box.offsetWidth, bh = box.offsetHeight;
+      var vr = vid.videoWidth && vid.videoHeight ? vid.videoWidth/vid.videoHeight : 864/496;
+      var br = bw/bh;
+      if(br > vr){
+        vid.style.width  = bw + 'px';
+        vid.style.height = Math.ceil(bw/vr) + 'px';
+        vid.style.top    = Math.round((bh - bw/vr)/2) + 'px';
+        vid.style.left   = '0';
+      } else {
+        vid.style.height = bh + 'px';
+        vid.style.width  = Math.ceil(bh*vr) + 'px';
+        vid.style.top    = '0';
+        vid.style.left   = Math.round((bw - bh*vr)/2) + 'px';
+      }
+    }
+    vid.addEventListener('loadedmetadata', fit);
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', function(){ setTimeout(fit, 150); });
+    if(vid.readyState >= 1) fit(); else vid.addEventListener('loadeddata', fit);
+  })();
+  </script>
 </body>                                                         
   </html>
