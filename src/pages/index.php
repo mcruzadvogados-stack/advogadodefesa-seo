@@ -197,35 +197,6 @@
     font-weight: 700;
     font-size: 1.08em;
   }
-
-  /* ── HERO VIDEO — lado direito do section_home ───────── */
-  .hero_video_wrap {
-    flex: 1;
-    align-self: center;
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,.5);
-    animation: heroSlideUp .8s .5s cubic-bezier(.22,1,.36,1) both;
-    max-width: 480px;
-  }
-  .hero_video_wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(26,26,46,.3) 0%, rgba(26,26,46,.05) 100%);
-    pointer-events: none;
-  }
-  .hero_video {
-    display: block;
-    width: 100%;
-    height: auto;
-    opacity: .72;
-    object-fit: cover;
-  }
-  @media (max-width: 900px) {
-    .hero_video_wrap { display: none; }
-  }
   </style>                                     
 
       <!-- WebSite + FAQPage JSON-LD -->
@@ -271,6 +242,12 @@
                                                                   
       <!-- SECTION HOME -->
       <section class="section_home" id="section_home">
+          <video class="hero_bg_video" autoplay muted loop playsinline preload="metadata"
+              poster="./src/img/hero_poster.jpg" aria-hidden="true">
+              <source src="./src/video/hero.webm" type="video/webm">
+              <source src="./src/video/hero.mp4" type="video/mp4">
+          </video>
+          <div class="hero_bg_overlay" aria-hidden="true"></div>
           <div class="home_box">                                                                                                                                                                                
               <h1 class="h1_hero"><span class="h1_linha h1_l1">O Melhor Advogado</span><span class="h1_linha h1_l2">é aquele que apresenta soluções jurídicas</span><span class="h1_linha h1_l3">com excelência e dedicação</span><span class="h1_linha h1_l4 h1_cta">e resolve o seu problema.</span></h1>
               <h4>Buscar seu direito é nosso trabalho, com advogados especialistas em diversas áreas</h4>                                                     
@@ -285,13 +262,6 @@
               <a class="btn_home" href="https://mpago.la/2Zmfvuf">                                                                                                                                              
                   <h4>Falar com um advogado</h4>                                                                                                                                                                
               </a>
-          </div>                                                                                                                                                                                                
-          <div class="hero_video_wrap" aria-hidden="true">
-              <video class="hero_video" autoplay muted loop playsinline preload="metadata"
-                  poster="./src/img/hero_poster.jpg">
-                  <source src="./src/video/hero.webm" type="video/webm">
-                  <source src="./src/video/hero.mp4" type="video/mp4">
-              </video>
           </div>
           <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
       </section>                                                                                                                                                                                                
