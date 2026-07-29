@@ -119,6 +119,21 @@
         flex-direction: row;
         padding: 0 5%;
     }
+    .hero_bg_video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        opacity: .38;
+        z-index: 0;
+        pointer-events: none;
+    }
+
     .section_home .home_box{
         width: 40%;
         height: 100%;
