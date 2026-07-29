@@ -198,47 +198,31 @@
     font-size: 1.08em;
   }
 
-  /* ── HERO VIDEO LAYOUT ──────────────────────────────── */
-  .section_home { overflow: hidden; }
-  .home_inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-  .home_box { flex: 0 0 52%; }
+  /* ── HERO VIDEO WIDGET (fixed, bottom-right) ────────── */
   .hero_video_wrap {
-    flex: 0 0 44%;
-    position: relative;
-    border-radius: 16px;
+    position: fixed;
+    bottom: 122px;
+    right: 50px;
+    width: 200px;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,.45);
+    box-shadow: 0 0 10px rgba(0,0,0,.62);
+    z-index: 998;
     animation: heroSlideUp .8s .5s cubic-bezier(.22,1,.36,1) both;
   }
   .hero_video_wrap::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(26,26,46,.35) 0%, rgba(26,26,46,.1) 100%);
+    background: linear-gradient(160deg, rgba(26,26,46,.3) 0%, transparent 60%);
     pointer-events: none;
-    border-radius: 16px;
   }
   .hero_video {
     display: block;
     width: 100%;
     height: auto;
-    opacity: .72;
-    border-radius: 16px;
+    opacity: .78;
     object-fit: cover;
-  }
-  @media (max-width: 900px) {
-    .home_inner { flex-direction: column; padding: 0 20px; gap: 24px; }
-    .home_box, .hero_video_wrap { flex: unset; width: 100%; }
-    .hero_video_wrap { max-width: 480px; margin: 0 auto; }
   }
   @media (max-width: 640px) {
     .hero_video_wrap { display: none; }
@@ -258,6 +242,13 @@
                                                                   
       <!-- AUTOLOAD S7VEN -->                                                                                                                                                                                   
       <?php include('./autoload_seven.php'); ?>                   
+          <div class="hero_video_wrap" aria-hidden="true">
+              <video class="hero_video" autoplay muted loop playsinline preload="metadata"
+                  poster="./src/img/hero_poster.jpg">
+                  <source src="./src/video/hero.webm" type="video/webm">
+                  <source src="./src/video/hero.mp4" type="video/mp4">
+              </video>
+          </div>
                                                                                                                                                                                                                 
       <a class="whatsapp" href="https://api.whatsapp.com/send?phone=554732731422&text=Ol%C3%A1,%20gostaria%20de%20falar%20com%20um%20advogado." target="_blank" rel="noopener noreferrer" aria-label="Atendimento 
   via WhatsApp">                                                                                                                                                                                                
@@ -288,7 +279,6 @@
                                                                   
       <!-- SECTION HOME -->
       <section class="section_home" id="section_home">
-          <div class="home_inner">
           <div class="home_box">                                                                                                                                                                                
               <h1 class="h1_hero"><span class="h1_linha h1_l1">O Melhor Advogado</span><span class="h1_linha h1_l2">é aquele que apresenta soluções jurídicas</span><span class="h1_linha h1_l3">com excelência e dedicação</span><span class="h1_linha h1_l4 h1_cta">e resolve o seu problema.</span></h1>
               <h4>Buscar seu direito é nosso trabalho, com advogados especialistas em diversas áreas</h4>                                                     
@@ -304,14 +294,6 @@
                   <h4>Falar com um advogado</h4>                                                                                                                                                                
               </a>
           </div>                                                                                                                                                                                                
-          <div class="hero_video_wrap" aria-hidden="true">
-              <video class="hero_video" autoplay muted loop playsinline preload="metadata"
-                  poster="./src/img/hero_poster.jpg">
-                  <source src="./src/video/hero.webm" type="video/webm">
-                  <source src="./src/video/hero.mp4" type="video/mp4">
-              </video>
-          </div>
-          </div><!-- /home_inner -->
           <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
       </section>                                                                                                                                                                                                
                                                                                                                                                                                                                 
