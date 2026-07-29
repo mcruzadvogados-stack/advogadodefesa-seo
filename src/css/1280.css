@@ -114,10 +114,8 @@
         position: relative;
         width: 100vw;
         height: 100vh;
-        background: url('../img/GB_HOME2.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        overflow: hidden;
+        background: #0d0d1a;
         display: flex;
         flex-direction: row;
         padding: 0 5%;
