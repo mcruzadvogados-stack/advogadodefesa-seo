@@ -128,38 +128,39 @@
       <link rel="stylesheet" href="./src/css/768.css?id=<?php echo $refreshkey; ?>">                                                                                                                            
       <link rel="stylesheet" href="./src/css/640.css?id=<?php echo $refreshkey; ?>">                                                                                                                            
       <link rel="stylesheet" href="./src/css/430.css?id=<?php echo $refreshkey; ?>">
-      <style>                                                                                                                                                                                                       
+      <style>
   /* Textos caramelo */
-  h1, h2, h3, h4, h5, p, span, address { color: #c8a96e; }                                                                                                                                                      
-                                                                                                                                                                                                                
-  /* Exceções: botões ficam brancos */                                                                                                                                                                          
-  .btn_home h4,                                                                                                                                                                                                 
-  .btn_especialidades h5,                                         
+  h1, h2, h3, h4, h5, p, span, address { color: #c8a96e; }
+
+  /* Exceções: botões ficam brancos */
+  .btn_home h4,
+  .btn_especialidades h5,
   .btn_card h5,
-  .btn_action h4,                                                                                                                                                                                               
+  .btn_action h4,
   .btn_enviar_form h5,
-  .nav_button { color: white !important; }                                                                                                                                                                      
-                                                                  
+  .nav_button { color: white !important; }
+
   /* Fundos cinza claro nas seções */
   .section_especialidades,
-  .section_experiencia,                                                                                                                                                                                         
+  .section_experiencia,
   .section_endereco { background: #f5f2ec !important; }
-   footer { background: #f5f2ec !important; }                  
-      footer h5, footer p, footer span, footer a { color: #c8a96e !important; }                                                                                                                                 
-      footer .footer_bottom { border-top: 1px solid rgba(200,169,110,.3); }
-      .section_especialidades h2, .section_especialidades h4,                                                                                                                                                   
-      .section_especialidades h5, .section_especialidades p,                                                                                                                                                    
-      .section_experiencia h2, .section_experiencia h4,                                                                                                                                                         
-      .section_experiencia p, .section_experiencia span,                                                                                                                                                        
-      .section_endereco h2, .section_endereco address,                                                                                                                                                          
-      .section_endereco h4, .section_endereco h5 {
-          color: #1a1a2e !important;                                                                                                                                                                            
-      }                                                           
-      .section_especialidades .card_body h4,                                                                                                                                                                    
-      .section_especialidades .card_body h5 {                                                                                                                                                                   
-          color: #1a1a2e !important;
-      }                    
-       .section_home h1, .section_home h4, .section_home h5 { color: #c8a96e !important; }
+  footer { background: #f5f2ec !important; }
+  footer h5, footer p, footer span, footer a { color: #c8a96e !important; }
+  footer .footer_bottom { border-top: 1px solid rgba(200,169,110,.3); }
+  .section_especialidades h2, .section_especialidades h4,
+  .section_especialidades h5, .section_especialidades p,
+  .section_experiencia h2, .section_experiencia h4,
+  .section_experiencia p, .section_experiencia span,
+  .section_endereco h2, .section_endereco address,
+  .section_endereco h4, .section_endereco h5 {
+    color: #1a1a2e !important;
+  }
+  .section_especialidades .card_body h4,
+  .section_especialidades .card_body h5 {
+    color: #1a1a2e !important;
+  }
+  .section_home h1, .section_home h4, .section_home h5 { color: #c8a96e !important; }
+
   /* ── H1 HERO ANIMATION ──────────────────────────────── */
   @keyframes heroSlideUp {
     from { opacity: 0; transform: translateY(32px); }
@@ -196,6 +197,102 @@
                heroCtaPulse 2.5s 1.7s ease-in-out infinite;
     font-weight: 700;
     font-size: 1.08em;
+  }
+
+  /* ── WhatsApp sempre visível em mobile ──────────────────────────── */
+  @media (max-width: 768px) {
+    body .whatsapp { display: flex !important; }
+  }
+
+  /* ── Landscape mobile — ocultar seções pesadas e ajustar layout ─── */
+  @media (orientation: landscape) and (max-height: 540px) {
+    .banner,
+    #section_diferenciais,
+    #section_contatos,
+    .banner_depoimentos { display: none !important; }
+
+    body .section_home {
+      flex-direction: row !important;
+      padding: 58px 5% 8px !important;
+      height: 100vh !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      box-sizing: border-box !important;
+    }
+
+    body .section_home .hero_bg_video {
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%,-50%) !important;
+      height: 100vh !important;
+      width: calc(100vh * 1.7419) !important;
+      max-width: none !important;
+      flex: none !important;
+      order: unset !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      opacity: 0.35 !important;
+      z-index: 1 !important;
+    }
+
+    body .section_home .hero_bg_overlay {
+      display: block !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background: rgba(13,13,26,0.65) !important;
+      z-index: 2 !important;
+      pointer-events: none !important;
+    }
+
+    body .section_home .home_box {
+      position: relative !important;
+      z-index: 3 !important;
+      width: 100% !important;
+      max-width: 500px !important;
+      height: auto !important;
+      max-height: calc(100vh - 65px) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+      overflow: hidden !important;
+      flex: 1 1 auto !important;
+    }
+
+    body .section_home .h1_hero {
+      display: block !important;
+      font-size: 1rem !important;
+      line-height: 1.35 !important;
+      margin: 0 !important;
+    }
+
+    body .section_home .h1_linha {
+      display: inline !important;
+      opacity: 1 !important;
+    }
+
+    body .section_home .home_box h4 {
+      font-size: 0.72rem !important;
+      line-height: 1.35 !important;
+      margin: 0 !important;
+    }
+
+    body .section_home .home_box h5 { display: none !important; }
+
+    body .section_home .home_box .btn_home {
+      padding: 5px 14px !important;
+      margin-top: 2px !important;
+    }
+
+    body .section_home .home_box .btn_home h4 {
+      font-size: 0.72rem !important;
+    }
+
+    body .section_home .fa-angle-down { display: none !important; }
   }
   </style>                                     
 
@@ -717,5 +814,21 @@
     document.querySelectorAll('.counter').forEach(function(el) { observer.observe(el); });
   })();
   </script>
+
+<script>
+(function(){
+  /* Ocultar seções em mobile (≤768px), ambas orientações */
+  var hideEls = ['#section_contatos','.banner','#section_diferenciais','.banner_depoimentos'].map(function(s){ return document.querySelector(s); }).filter(Boolean);
+  function apply() {
+    var mobile = window.innerWidth <= 768;
+    hideEls.forEach(function(el){
+      if (mobile) el.style.setProperty('display','none','important');
+      else el.style.removeProperty('display');
+    });
+  }
+  apply();
+  window.addEventListener('resize', apply);
+})();
+</script>
 </body>                                                         
   </html>
