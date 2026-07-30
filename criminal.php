@@ -119,6 +119,7 @@
       <link rel="stylesheet" href="./src/css/640.css?id=28072026060748">
       <link rel="stylesheet" href="./src/css/430.css?id=28072026060748">
       <link rel="stylesheet" href="./src/css/pages.css?id=28072026060748">
+<style>#whatsapp,div.whatsapp,a.whatsapp{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}</style>
 </head>                                                                                                                                                                                                       
                                                                   
   <body class="">                                                                                                                                                                       
@@ -259,26 +260,12 @@
           <div class="footer_bright">                                                                                                                                                                           
               <h5>Advogado de Defesa — Seu Direito é Nosso Trabalho</h5>                                                                                                                                        
           </div>                                                                                                                                                                                                
-      </div>  
-      
-       <style>#whatsapp,div.whatsapp,a.whatsapp{pointer-events:none!important;opacity:0!important}</style>
-      <script>                                                                                                                                                                                                  
-      (function(){
-          var a=document.createElement('a');                                                                                                                                                                    
-          a.href='https://api.whatsapp.com/send?phone=554732731422&text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20um%20advogado.';                                                                            
-          a.target='_blank';a.rel='noopener noreferrer';                                                                                                                                                        
-          a.setAttribute('aria-label','Atendimento via WhatsApp');                                                                                                                                              
-          a.innerHTML='<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';                                                                                                                               
-          a.style.cssText='position:fixed;bottom:24px;right:24px;z-index:99999;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;fo
-  nt-size:28px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3);';                                                                                                                                     
-          document.body.appendChild(a);                                                                                                                                                                         
-      })();                                                                                                                                                                                                     
-      </script>                          
+      </div>                          
   </footer>                                                              
 
       <script defer src="./src/js/script.js?id=28072026060748"></script>
       <script defer src="./src/js/IntersectionObserver.js?id=28072026060748"></script>                                                                                                              
       <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-      <script defer src="./src/js/pages.js?id=28072026060748"></script>                                                                                                                             
+      <script defer src="./src/js/pages.js?id=30072026000001"></script>                                                                                                                             
   </body>                                                         
   </html> 
