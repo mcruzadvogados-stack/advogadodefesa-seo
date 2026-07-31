@@ -261,6 +261,7 @@
       <script defer src="./src/js/script.js?id=28072026060749"></script>
       <script defer src="./src/js/IntersectionObserver.js?id=28072026060749"></script>                                                                                                              
       <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>                                                                                                                                 
+      <script defer src="./src/js/wpp-widget.js?id=30072026000001"></script>
       <script defer src="./src/js/pages.js?id=30072026000001"></script>
   </body>                                                                                                                                                                                                       
   </html>                                            
