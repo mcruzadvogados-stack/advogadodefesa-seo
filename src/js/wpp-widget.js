@@ -191,12 +191,12 @@
             });
         }
 
-        // Mensagem final + abre WhatsApp
+        // Mensagem final + botão direto para WhatsApp
         function showClosing() {
             bot('Entendido. 📋 Já ajudamos +4.000 clientes em situações como a sua.', 600, function() {
             bot('⚠️ Importante: casos como o seu têm prazo legal. Quanto antes agir, melhor!', 1000, function() {
-            bot('Conectando você com o Dr. Cruz agora... ⏳', 800, function() {
-                setTimeout(function() { openWhatsApp(answers); }, 1200);
+            bot('Clique abaixo para falar com o Dr. Cruz agora — suas respostas já estarão na mensagem! 👇', 800, function() {
+                showWhatsAppButton(btnArea, answers);
             }); }); });
         }
 
@@ -286,21 +286,43 @@
         document.head.appendChild(style);
     }
 
-    // ── Abre WhatsApp com contexto pré-preenchido ────────────────
+    // ── Botão final de acesso ao WhatsApp (evita bloqueio de popup) ─
 
-    function openWhatsApp(answers) {
-        var lines = ['Olá! Vim pelo site da CRUZ Advocacia.\n'];
-        lines.push('📋 Área: '   + (answers.area    || ''));
-        if (answers.detalhe) lines.push('📌 Caso: '    + answers.detalhe);
-        if (answers.tempo)   lines.push('⏰ Ocorreu: ' + answers.tempo);
-        lines.push('\nGostaria de uma análise do meu caso.');
+    function showWhatsAppButton(btnArea, answers) {
+        clearEl(btnArea);
 
-        window.open(
-            'https://api.whatsapp.com/send?phone=' + PHONE +
-            '&text=' + encodeURIComponent(lines.join('\n')),
-            '_blank',
-            'noopener,noreferrer'
-        );
+        var link = document.createElement('a');
+        link.href   = buildWhatsAppUrl(answers);
+        link.target = '_blank';
+        link.rel    = 'noopener noreferrer';
+        link.style.cssText =
+            'display:flex;align-items:center;justify-content:center;gap:8px;' +
+            'background:#25d366;color:#fff;text-decoration:none;border-radius:20px;' +
+            'padding:10px 18px;font-size:13px;font-weight:700;font-family:Arial,sans-serif;' +
+            'width:100%;box-sizing:border-box;box-shadow:0 2px 8px rgba(0,0,0,.2);';
+        link.innerHTML =
+            '<i class="fa-brands fa-whatsapp" style="font-size:18px;" aria-hidden="true"></i>' +
+            'Falar com o Dr. Cruz agora →';
+
+        btnArea.appendChild(link);
+    }
+
+    // ── Monta URL do WhatsApp com relatório de qualificação ──────
+
+    function buildWhatsAppUrl(answers) {
+        var lines = [
+            'Olá! Acabei de responder o questionário no site da CRUZ Advocacia.',
+            '',
+            '*📋 Relatório do meu caso:*',
+            '• Área: '                        + (answers.area    || 'Não informado'),
+            answers.detalhe ? '• Situação: '  + answers.detalhe : null,
+            answers.tempo   ? '• Ocorreu há: ' + answers.tempo   : null,
+            '',
+            'Gostaria de uma análise do meu caso.'
+        ].filter(function(l) { return l !== null; });
+
+        return 'https://api.whatsapp.com/send?phone=' + PHONE +
+               '&text=' + encodeURIComponent(lines.join('\n'));
     }
 
 })();
