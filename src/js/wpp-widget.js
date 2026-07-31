@@ -2,7 +2,7 @@
 
 (function WhatsAppWidget() {
 
-    var PHONE = '554732731422';
+    var PHONE = '5547991313686';
 
     var AREAS = [
         {
