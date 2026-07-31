@@ -123,7 +123,7 @@
             if (panel.style.display !== 'none' && !started) {
                 started = true;
                 injectAnimStyle();
-                startFlow(msgArea, btnArea);
+                startFlow(msgArea, btnArea, panel);
             }
         }).observe(panel, { attributes: true, attributeFilter: ['style'] });
 
@@ -148,7 +148,7 @@
 
     // ── Fluxo conversacional ─────────────────────────────────────
 
-    function startFlow(msgArea, btnArea) {
+    function startFlow(msgArea, btnArea, panel) {
         var answers = {};
 
         // Envia mensagem do bot com indicador de digitação
@@ -196,7 +196,7 @@
             bot('Entendido. 📋 Já ajudamos +4.000 clientes em situações como a sua.', 600, function() {
             bot('⚠️ Importante: casos como o seu têm prazo legal. Quanto antes agir, melhor!', 1000, function() {
             bot('Clique abaixo para falar com o Dr. Cruz agora — suas respostas já estarão na mensagem! 👇', 800, function() {
-                showWhatsAppButton(btnArea, answers);
+                showWhatsAppButton(btnArea, answers, panel);
             }); }); });
         }
 
@@ -288,7 +288,7 @@
 
     // ── Botão final de acesso ao WhatsApp (evita bloqueio de popup) ─
 
-    function showWhatsAppButton(btnArea, answers) {
+    function showWhatsAppButton(btnArea, answers, panel) {
         clearEl(btnArea);
 
         var link = document.createElement('a');
@@ -303,6 +303,10 @@
         link.innerHTML =
             '<i class="fa-brands fa-whatsapp" style="font-size:18px;" aria-hidden="true"></i>' +
             'Falar com o Dr. Cruz agora →';
+
+        link.addEventListener('click', function() {
+            setTimeout(function() { panel.style.display = 'none'; }, 3000);
+        });
 
         btnArea.appendChild(link);
     }
