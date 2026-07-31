@@ -2,9 +2,11 @@
 
 (function WhatsAppWidget() {
 
-    var PHONE = '5547991313686';
+    // ── Configuração ─────────────────────────────────────────────
+    const PHONE          = '5547991313686';
+    const INACTIVITY_MS  = 4000;
 
-    var AREAS = [
+    const AREAS = [
         {
             label:   '⚖️ Trabalhista',
             name:    'Trabalhista',
@@ -24,7 +26,7 @@
         { label: '❓ Outro',    name: 'Outro',    details: null }
     ];
 
-    // Inicializa após DOM pronto
+    // ── Bootstrap ─────────────────────────────────────────────────
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -33,39 +35,36 @@
 
     function init() {
         hideCmsWhatsApp();
-        document.body.appendChild(buildContainer());
+        document.body.appendChild(buildWidget());
     }
 
     // ── Oculta elementos originais do CMS ────────────────────────
-
     function hideCmsWhatsApp() {
-        document.querySelectorAll('#whatsapp, div.whatsapp, a.whatsapp').forEach(function(el) {
-            el.style.setProperty('display',     'none',   'important');
-            el.style.setProperty('visibility',  'hidden', 'important');
+        document.querySelectorAll('#whatsapp, div.whatsapp, a.whatsapp').forEach(el => {
+            el.style.setProperty('display',    'none',   'important');
+            el.style.setProperty('visibility', 'hidden', 'important');
         });
     }
 
-    // ── Container principal ──────────────────────────────────────
-
-    function buildContainer() {
-        var container = el('div',
+    // ── Widget (container + painel + botão) ───────────────────────
+    function buildWidget() {
+        const container = createElement('div',
             'position:fixed;bottom:24px;right:24px;z-index:99999;' +
             'display:flex;flex-direction:column;align-items:flex-end;gap:10px;');
 
-        var panel = buildPanel();
-        var fab   = buildFab(panel);
+        const panel = buildPanel();
+        const fab   = buildFab(panel);
 
         container.appendChild(panel);
         container.appendChild(fab);
         return container;
     }
 
-    // ── Botão flutuante ──────────────────────────────────────────
-
+    // ── Botão flutuante ───────────────────────────────────────────
     function buildFab(panel) {
-        var wrap = el('div', 'position:relative;width:62px;height:62px;');
+        const wrap = createElement('div', 'position:relative;width:62px;height:62px;');
 
-        var btn = el('div',
+        const btn = createElement('div',
             'position:absolute;inset:3px;background:#25d366;border-radius:50%;' +
             'display:flex;align-items:center;justify-content:center;color:#fff;' +
             'font-size:28px;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer;' +
@@ -75,14 +74,14 @@
         btn.setAttribute('aria-label', 'Abrir atendimento via WhatsApp');
         btn.innerHTML = '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';
 
-        btn.addEventListener('mouseover', function() { btn.style.opacity = '.85'; });
-        btn.addEventListener('mouseout',  function() { btn.style.opacity = '1';   });
-        btn.addEventListener('click',   function() { togglePanel(panel); });
-        btn.addEventListener('keydown', function(e) {
+        btn.addEventListener('mouseover', () => { btn.style.opacity = '.85'; });
+        btn.addEventListener('mouseout',  () => { btn.style.opacity = '1';   });
+        btn.addEventListener('click',     () => togglePanel(panel));
+        btn.addEventListener('keydown',   e  => {
             if (e.key === 'Enter' || e.key === ' ') togglePanel(panel);
         });
 
-        var badge = el('span',
+        const badge = createElement('span',
             'position:absolute;top:0;right:0;background:#e53935;color:#fff;' +
             'font-size:11px;font-weight:700;font-family:Arial,sans-serif;' +
             'min-width:18px;height:18px;border-radius:9px;display:flex;' +
@@ -96,20 +95,19 @@
         return wrap;
     }
 
-    // ── Painel de chat ───────────────────────────────────────────
-
+    // ── Painel de chat ────────────────────────────────────────────
     function buildPanel() {
-        var panel = el('div',
+        const panel = createElement('div',
             'display:none;flex-direction:column;width:300px;max-height:460px;' +
             'background:#fff;border-radius:12px;' +
             'box-shadow:0 8px 32px rgba(0,0,0,.25);overflow:hidden;' +
             'font-family:Arial,sans-serif;font-size:14px;');
 
-        var msgArea = el('div',
+        const msgArea = createElement('div',
             'flex:1;overflow-y:auto;padding:12px;background:#ece5dd;' +
             'display:flex;flex-direction:column;gap:8px;');
 
-        var btnArea = el('div',
+        const btnArea = createElement('div',
             'padding:8px 10px;background:#f0f0f0;display:flex;flex-wrap:wrap;' +
             'gap:6px;border-top:1px solid #ddd;min-height:50px;align-content:center;');
 
@@ -117,24 +115,17 @@
         panel.appendChild(msgArea);
         panel.appendChild(btnArea);
 
-        // Inicia o fluxo na primeira abertura
-        var started = false;
-        new MutationObserver(function() {
-            if (panel.style.display !== 'none' && !started) {
-                started = true;
-                injectAnimStyle();
-                startFlow(msgArea, btnArea, panel);
-            }
-        }).observe(panel, { attributes: true, attributeFilter: ['style'] });
+        attachInactivityTimer(panel);
+        attachFlowTrigger(panel, msgArea, btnArea);
 
         return panel;
     }
 
     function buildHeader() {
-        var h = el('div',
+        const header = createElement('div',
             'background:#075e54;color:#fff;padding:10px 14px;' +
             'display:flex;align-items:center;gap:10px;flex-shrink:0;');
-        h.innerHTML =
+        header.innerHTML =
             '<div style="width:38px;height:38px;background:#25d366;border-radius:50%;' +
             'display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;" aria-hidden="true">' +
                 '<i class="fa-brands fa-whatsapp"></i>' +
@@ -143,79 +134,127 @@
                 '<div style="font-weight:700;font-size:13px;">CRUZ Advocacia</div>' +
                 '<div style="font-size:11px;opacity:.8;">● Online agora</div>' +
             '</div>';
-        return h;
+        return header;
     }
 
-    // ── Fluxo conversacional ─────────────────────────────────────
+    // ── Timer de inatividade ──────────────────────────────────────
+    function attachInactivityTimer(panel) {
+        let timer = null;
 
-    function startFlow(msgArea, btnArea, panel) {
-        var answers = {};
+        const resetTimer = () => {
+            if (panel.style.display === 'none') return;
+            clearTimeout(timer);
+            timer = setTimeout(() => closePanel(panel), INACTIVITY_MS);
+        };
 
-        // Envia mensagem do bot com indicador de digitação
-        function bot(text, delay, cb) {
-            setTimeout(function() {
-                showTyping(msgArea, function() {
-                    addBubble(msgArea, text, false);
-                    if (cb) cb();
+        const clearTimer = () => clearTimeout(timer);
+
+        // Expõe métodos para uso externo
+        panel._startInactivityTimer = resetTimer;
+        panel._clearInactivityTimer = clearTimer;
+
+        // Qualquer interação no painel reseta o timer
+        ['mousemove', 'click', 'keydown', 'touchstart'].forEach(event => {
+            panel.addEventListener(event, resetTimer, { passive: true });
+        });
+    }
+
+    // Inicia o fluxo conversacional na primeira vez que o painel abre
+    function attachFlowTrigger(panel, msgArea, btnArea) {
+        let started = false;
+        new MutationObserver(() => {
+            if (panel.style.display !== 'none' && !started) {
+                started = true;
+                injectAnimationStyle();
+                startConversationFlow(msgArea, btnArea, panel);
+            }
+        }).observe(panel, { attributes: true, attributeFilter: ['style'] });
+    }
+
+    // ── Controle de visibilidade do painel ────────────────────────
+    function togglePanel(panel) {
+        if (panel.style.display === 'none') {
+            openPanel(panel);
+        } else {
+            closePanel(panel);
+        }
+    }
+
+    function openPanel(panel) {
+        panel.style.display = 'flex';
+        panel._startInactivityTimer();
+    }
+
+    function closePanel(panel) {
+        panel._clearInactivityTimer();
+        panel.style.display = 'none';
+    }
+
+    // ── Fluxo conversacional ──────────────────────────────────────
+    function startConversationFlow(msgArea, btnArea, panel) {
+        const answers = {};
+
+        function sendBotMessage(text, delay, callback) {
+            setTimeout(() => {
+                showTypingIndicator(msgArea, () => {
+                    addMessageBubble(msgArea, text, false);
+                    if (callback) callback();
                 });
             }, delay || 0);
         }
 
-        // Renderiza botões de opção
-        function choices(opts, key, cb) {
-            clearEl(btnArea);
-            opts.forEach(function(label) {
-                var b = el('button',
+        function showChoiceButtons(options, answerKey, callback) {
+            clearContainer(btnArea);
+            options.forEach(label => {
+                const btn = createElement('button',
                     'background:#25d366;color:#fff;border:none;border-radius:16px;' +
                     'padding:6px 12px;font-size:12px;cursor:pointer;' +
                     'font-family:Arial,sans-serif;white-space:nowrap;');
-                b.textContent = label;
-                b.addEventListener('click', function() {
-                    clearEl(btnArea);
-                    if (key) answers[key] = label;
-                    addBubble(msgArea, label, true);
-                    cb(label);
+                btn.textContent = label;
+                btn.addEventListener('click', () => {
+                    clearContainer(btnArea);
+                    if (answerKey) answers[answerKey] = label;
+                    addMessageBubble(msgArea, label, true);
+                    callback(label);
                 });
-                btnArea.appendChild(b);
+                btnArea.appendChild(btn);
             });
         }
 
-        // Pergunta de tempo (compartilhada entre áreas)
-        function askTempo() {
-            bot('Há quanto tempo ocorreu isso?', 600, function() {
-                choices(
+        function askTimeframe() {
+            sendBotMessage('Há quanto tempo ocorreu isso?', 600, () => {
+                showChoiceButtons(
                     ['Menos de 1 mês', '1 a 6 meses', '6 meses a 2 anos', 'Mais de 2 anos'],
                     'tempo',
-                    function() { showClosing(); }
+                    () => showClosingMessages()
                 );
             });
         }
 
-        // Mensagem final + botão direto para WhatsApp
-        function showClosing() {
-            bot('Entendido. 📋 Já ajudamos +4.000 clientes em situações como a sua.', 600, function() {
-            bot('⚠️ Importante: casos como o seu têm prazo legal. Quanto antes agir, melhor!', 1000, function() {
-            bot('Clique abaixo para falar com o Dr. Cruz agora — suas respostas já estarão na mensagem! 👇', 800, function() {
+        function showClosingMessages() {
+            sendBotMessage('Entendido. 📋 Já ajudamos +4.000 clientes em situações como a sua.', 600, () => {
+            sendBotMessage('⚠️ Importante: casos como o seu têm prazo legal. Quanto antes agir, melhor!', 1000, () => {
+            sendBotMessage('Clique abaixo para falar com o Dr. Cruz agora — suas respostas já estarão na mensagem! 👇', 800, () => {
                 showWhatsAppButton(btnArea, answers, panel);
             }); }); });
         }
 
         // Início do fluxo
-        bot('Olá! 👋 Aqui é a CRUZ Advocacia.', 400, function() {
-        bot('Para te conectar com o advogado certo, vou te fazer 3 perguntinhas rápidas. Pode ser? 😊', 1000, function() {
-            choices(['Pode! Vamos lá ✅'], null, function() {
+        sendBotMessage('Olá! 👋 Aqui é a CRUZ Advocacia.', 400, () => {
+        sendBotMessage('Para te conectar com o advogado certo, vou te fazer 3 perguntinhas rápidas. Pode ser? 😊', 1000, () => {
+            showChoiceButtons(['Pode! Vamos lá ✅'], null, () => {
 
-                bot('Qual área melhor descreve sua situação?', 600, function() {
-                    choices(AREAS.map(function(a) { return a.label; }), null, function(label) {
-                        var area = AREAS.find(function(a) { return a.label === label; });
+                sendBotMessage('Qual área melhor descreve sua situação?', 600, () => {
+                    showChoiceButtons(AREAS.map(a => a.label), null, label => {
+                        const area = AREAS.find(a => a.label === label);
                         answers.area = area.name;
 
                         if (area.details) {
-                            bot('O que melhor descreve seu caso?', 600, function() {
-                                choices(area.details, 'detalhe', function() { askTempo(); });
+                            sendBotMessage('O que melhor descreve seu caso?', 600, () => {
+                                showChoiceButtons(area.details, 'detalhe', () => askTimeframe());
                             });
                         } else {
-                            askTempo();
+                            askTimeframe();
                         }
                     });
                 });
@@ -224,37 +263,32 @@
         }); });
     }
 
-    // ── Helpers de UI ────────────────────────────────────────────
-
-    function togglePanel(panel) {
-        panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
-    }
-
-    function showTyping(msgArea, cb) {
-        var wrap = el('div',
+    // ── UI helpers ────────────────────────────────────────────────
+    function showTypingIndicator(msgArea, callback) {
+        const wrap = createElement('div',
             'background:#fff;border-radius:12px 12px 12px 0;padding:10px 14px;' +
             'align-self:flex-start;box-shadow:0 1px 2px rgba(0,0,0,.15);' +
             'display:flex;gap:4px;');
 
-        ['0s', '0.2s', '0.4s'].forEach(function(delay) {
-            var dot = el('span',
+        ['0s', '0.2s', '0.4s'].forEach(delay => {
+            const dot = createElement('span',
                 'width:7px;height:7px;background:#aaa;border-radius:50%;' +
                 'animation:wppDot .9s infinite;animation-delay:' + delay + ';');
             wrap.appendChild(dot);
         });
 
         msgArea.appendChild(wrap);
-        scrollBottom(msgArea);
+        scrollToBottom(msgArea);
 
-        setTimeout(function() {
+        setTimeout(() => {
             if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
-            cb();
+            callback();
         }, 850);
     }
 
-    function addBubble(msgArea, text, isUser) {
-        var bubble = el('div',
-            isUser
+    function addMessageBubble(msgArea, text, isUserMessage) {
+        const bubble = createElement('div',
+            isUserMessage
                 ? 'background:#dcf8c6;border-radius:12px 12px 0 12px;padding:8px 12px;' +
                   'max-width:80%;align-self:flex-end;box-shadow:0 1px 2px rgba(0,0,0,.15);' +
                   'word-break:break-word;line-height:1.4;'
@@ -263,35 +297,13 @@
                   'word-break:break-word;line-height:1.4;');
         bubble.textContent = text;
         msgArea.appendChild(bubble);
-        scrollBottom(msgArea);
+        scrollToBottom(msgArea);
     }
-
-    function clearEl(container) {
-        while (container.firstChild) container.removeChild(container.firstChild);
-    }
-
-    function scrollBottom(container) { container.scrollTop = container.scrollHeight; }
-
-    function el(tag, cssText) {
-        var node = document.createElement(tag);
-        if (cssText) node.style.cssText = cssText;
-        return node;
-    }
-
-    function injectAnimStyle() {
-        if (document.getElementById('wpp-widget-style')) return;
-        var style = document.createElement('style');
-        style.id = 'wpp-widget-style';
-        style.textContent = '@keyframes wppDot{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}';
-        document.head.appendChild(style);
-    }
-
-    // ── Botão final de acesso ao WhatsApp (evita bloqueio de popup) ─
 
     function showWhatsAppButton(btnArea, answers, panel) {
-        clearEl(btnArea);
+        clearContainer(btnArea);
 
-        var link = document.createElement('a');
+        const link = document.createElement('a');
         link.href   = buildWhatsAppUrl(answers);
         link.target = '_blank';
         link.rel    = 'noopener noreferrer';
@@ -304,29 +316,50 @@
             '<i class="fa-brands fa-whatsapp" style="font-size:18px;" aria-hidden="true"></i>' +
             'Falar com o Dr. Cruz agora →';
 
-        link.addEventListener('click', function() {
-            setTimeout(function() { panel.style.display = 'none'; }, 3000);
+        link.addEventListener('click', () => {
+            setTimeout(() => closePanel(panel), 3000);
         });
 
         btnArea.appendChild(link);
     }
 
-    // ── Monta URL do WhatsApp com relatório de qualificação ──────
-
     function buildWhatsAppUrl(answers) {
-        var lines = [
+        const lines = [
             'Olá! Acabei de responder o questionário no site da CRUZ Advocacia.',
             '',
             '*📋 Relatório do meu caso:*',
-            '• Área: '                        + (answers.area    || 'Não informado'),
+            '• Área: '                               + (answers.area    || 'Não informado'),
             answers.detalhe ? '• Situação: '  + answers.detalhe : null,
             answers.tempo   ? '• Ocorreu há: ' + answers.tempo   : null,
             '',
             'Gostaria de uma análise do meu caso.'
-        ].filter(function(l) { return l !== null; });
+        ].filter(line => line !== null);
 
         return 'https://api.whatsapp.com/send?phone=' + PHONE +
                '&text=' + encodeURIComponent(lines.join('\n'));
+    }
+
+    // ── Utils ─────────────────────────────────────────────────────
+    function createElement(tag, cssText) {
+        const node = document.createElement(tag);
+        if (cssText) node.style.cssText = cssText;
+        return node;
+    }
+
+    function clearContainer(container) {
+        while (container.firstChild) container.removeChild(container.firstChild);
+    }
+
+    function scrollToBottom(container) {
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function injectAnimationStyle() {
+        if (document.getElementById('wpp-widget-style')) return;
+        const style = document.createElement('style');
+        style.id = 'wpp-widget-style';
+        style.textContent = '@keyframes wppDot{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}';
+        document.head.appendChild(style);
     }
 
 })();

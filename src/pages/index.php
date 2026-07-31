@@ -294,7 +294,17 @@
 
     body .section_home .fa-angle-down { display: none !important; }
   }
-  </style>                                     
+
+  /* ── Transparência harmoniosa — vídeo e imagens ─────────────── */
+  .hero_bg_video                { opacity: .40 !important; }
+  .sobre_right img,
+  .experiencia_right img        { opacity: .40 !important; transition: opacity 300ms ease; }
+  .card img                     { opacity: .40 !important; transition: opacity 300ms ease; }
+  .card:hover img               { opacity: 1   !important; }
+
+  /* ── Especialidades — altura adaptável e padding simétrico ───── */
+  body .section_especialidades  { height: auto !important; min-height: 100vh !important; padding: 80px 10% !important; }
+  </style>
 
       <!-- WebSite + FAQPage JSON-LD -->
       <script type="application/ld+json">
@@ -744,90 +754,9 @@
                                                                                                                                                                                                                 
                                                                   
       <!-- JS -->
+      <script>document.body.style.overflowY = 'scroll';</script>
       <script defer src="./src/js/script.js?id=<?php echo $refreshkey; ?>"></script>
       <script defer src="./src/js/IntersectionObserver.js?id=<?php echo $refreshkey; ?>"></script>
       <script defer src="./src/js/wpp-widget.js?id=<?php echo $refreshkey; ?>"></script>
-      <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>                                                                                               
-                                                                                                                                                                                                                
-      <script>                                                    
-          document.body.style.overflowY = 'scroll';                                                                                                                                                             
-                                                                  
-          // Proteção de conteúdo
-          document.addEventListener('contextmenu', function(e) { e.preventDefault(); });                                                                                                                        
-          document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-          document.addEventListener('selectstart', function(e) { e.preventDefault(); });                                                                                                                        
-                                                                  
-          // Header sticky ao rolar                                                                                                                                                                             
-          $(window).scroll(function() {                           
-              var scroll = $(window).scrollTop();                                                                                                                                                               
-              if (scroll >= 400) {                                
-                  document.getElementById('header').classList.add('sticky');                                                                                                                                    
-              } else {
-                  document.getElementById('header').classList.remove('sticky');                                                                                                                                 
-              }                                                                                                                                                                                                 
-          });
-      </script>
-                       
-  
-  <script>
-  (function(){
-    function fmt(n, prefix, suffix) {
-      return prefix + Math.round(n).toLocaleString('pt-BR') + suffix;
-    }
-    function animateCounter(el) {
-      var target  = +el.dataset.target;
-      var prefix  = el.dataset.prefix || '';
-      var suffix  = el.dataset.suffix || '';
-      var phase1End    = target - 5;   // para nos últimos 5
-      var phase1Ms     = 5000;         // primeiros 5 segundos
-      var start        = null;
-
-      // Fase 1: sobe de 0 até (target - 5) em 5 segundos
-      function phase1(ts) {
-        if (!start) start = ts;
-        var p = Math.min((ts - start) / phase1Ms, 1);
-        el.textContent = fmt(p * phase1End, prefix, suffix);
-        if (p < 1) { requestAnimationFrame(phase1); }
-        else        { startPhase2(phase1End); }
-      }
-
-      // Fase 2: +1 por segundo durante 5 segundos
-      function startPhase2(current) {
-        var n = Math.round(current);
-        var timer = setInterval(function() {
-          n++;
-          el.textContent = fmt(n, prefix, suffix);
-          if (n >= target) clearInterval(timer);
-        }, 1000);
-      }
-
-      requestAnimationFrame(phase1);
-    }
-
-    var observer = new IntersectionObserver(function(entries, obs) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.4 });
-    document.querySelectorAll('.counter').forEach(function(el) { observer.observe(el); });
-  })();
-  </script>
-
-<script>
-(function(){
-  /* Ocultar seções em mobile (≤768px), ambas orientações */
-  var hideEls = ['#section_contatos','.banner','#section_diferenciais','.banner_depoimentos'].map(function(s){ return document.querySelector(s); }).filter(Boolean);
-  function apply() {
-    var mobile = window.innerWidth <= 768;
-    hideEls.forEach(function(el){
-      if (mobile) el.style.setProperty('display','none','important');
-      else el.style.removeProperty('display');
-    });
-  }
-  apply();
-  window.addEventListener('resize', apply);
-})();
-</script>
-</body>                                                         
+  </body>
   </html>
