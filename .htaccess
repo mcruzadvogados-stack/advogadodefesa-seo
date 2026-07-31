@@ -1,7 +1,7 @@
 Options -Indexes
 
 # Redirecionar /mapa → Google Maps do escritório (antes de qualquer rewrite)
-Redirect 301 /mapa https://share.google/k9Py2p5u7c4vzhiL2
+Redirect 301 /mapa https://maps.google.com/?q=Cruz+Advocacia+Advogado+de+Defesa+Jaragua+do+Sul+SC
 
 # ── Security Headers ──────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
@@ -27,6 +27,20 @@ Redirect 301 /mapa https://share.google/k9Py2p5u7c4vzhiL2
     Header unset X-Powered-By
 </IfModule>
 
+# ── Cache — sem cache para CSS/JS (evita CDN servir versão antiga) ────────────
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+        Header unset ETag
+        Header unset Last-Modified
+    </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+    <FilesMatch "\.(css|js)$">
+        ExpiresActive Off
+    </FilesMatch>
+</IfModule>
+
 RewriteEngine On
 
 # Redirecionar www → sem www (canonical)
@@ -34,7 +48,7 @@ RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
 # Redirecionar /mapa → Google Maps do escritório
-RewriteRule ^mapa/?$ https://share.google/k9Py2p5u7c4vzhiL2 [R=301,L]
+RewriteRule ^mapa/?$ https://maps.google.com/?q=Cruz+Advocacia+Advogado+de+Defesa+Jaragua+do+Sul+SC [R=301,L]
 
 # Servir arquivos PHP reais diretamente (subpáginas com SEO)
 RewriteCond %{REQUEST_FILENAME} -f

@@ -667,8 +667,7 @@
                   <h4>Abrir localização no mapa</h4>                                                                                                                                                            
                   <div class="mapa_bottom">                       
                       <h5>Acesse a localização pelo Maps ou seu app de mapa padrão.</h5>                                                                                                                        
-                      <a class="btn_action" style="--var:#1ea73c" href="https://www.google.com/maps/place/R.+Ângelo+Schiochet,+280+-+Centro,+Jaraguá+do+Sul+-+SC,+89251-520/@-26.4939913,-49.0811204,1005m/data=
-  !3m2!1e3!4b1!4m6!3m5!1s0x94de951e064c3f9f:0x5c019982d097b31a!8m2!3d-26.4939913!4d-49.0811204!16s%2Fg%2F11c5n4nqtq?entry=ttu&g_ep=EgoyMDI2MDIxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener          
+                      <a class="btn_action" style="--var:#1ea73c" href="https://maps.google.com/?q=Cruz+Advocacia+Advogado+de+Defesa+Jaragua+do+Sul+SC" " target="_blank" rel="noopener          
   noreferrer">                                                                                                                                                                                                  
                           <h4>ABRIR MAPA</h4>                                                                                                                                                                   
                       </a>                                        
@@ -734,8 +733,7 @@
                   <a class="btn_footer" href="https://portaldeservicos.pdpj.jus.br/consulta" target="_blank" rel="noopener noreferrer" aria-label="Consultar processo judicial">                                
                       <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>                                                                                                                           
                   </a>                                            
-                  <a class="btn_footer" href="https://www.google.com/maps/place/R.+Ângelo+Schiochet,+280+-+Centro,+Jaraguá+do+Sul+-+SC,+89251-520/@-26.4939913,-49.0811204,1005m/data=!3m2!1e3!4b1!4m6!3m5!1s0x9
-  4de951e064c3f9f:0x5c019982d097b31a!8m2!3d-26.4939913!4d-49.0811204!16s%2Fg%2F11c5n4nqtq?entry=ttu&g_ep=EgoyMDI2MDIxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Como chegar
+                  <a class="btn_footer" href="https://maps.google.com/?q=Cruz+Advocacia+Advogado+de+Defesa+Jaragua+do+Sul+SC" " target="_blank" rel="noopener noreferrer" aria-label="Como chegar
    ao escritório">                                                                                                                                                                                              
                       <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>                                                                                                                           
                   </a>                                                                                                                                                                                          
