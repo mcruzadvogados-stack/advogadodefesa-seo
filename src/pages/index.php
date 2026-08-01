@@ -13,9 +13,8 @@
       <!-- Google Search Console — verificação via meta tag (código extraído do DNS TXT automaticamente) -->
       <meta name="google-site-verification" content="CrAqXvdMxwX1h45AuA6pG4EJ0U3ovTj75vWHZYdjJIM">
                                                                                                                                                                                                                 
-      <title>Advogado Jaraguá do Sul/SC | Trabalhista, Previdenciário e Civil | CRUZ Advocacia</title>                                                                                                          
-      <meta name="description" content="CRUZ Advocacia em Jaraguá do Sul/SC. Especialistas em Trabalhista, Previdenciário, Inventários e Civil em Santa Catarina. +4.000 clientes atendidos. Consulte pelo      
-  WhatsApp.">                                                                                                                                                                                                   
+      <title>Advogado em Jaraguá do Sul | CRUZ Advocacia</title>
+      <meta name="description" content="Advogado trabalhista, civil e previdenciário em Jaraguá do Sul/SC. +4.000 clientes atendidos. Fale agora pelo WhatsApp.">                                                                                                                                                                                                   
       <meta name="keywords" content="advogado Jaraguá do Sul, advogado trabalhista SC, advogado previdenciário Jaraguá do Sul, INSS negado, inventário e partilha SC, escritório advocacia Santa Catarina, 
   recursos criminais tribunal SC, advogado civil SC, CRUZ Advocacia">                                                                                                                                           
       <meta name="author" content="CRUZ Advocacia">               
@@ -40,7 +39,7 @@
                                                                                                                                                                                                                 
       <!-- Open Graph -->
       <meta property="og:title" content="CRUZ Advocacia — Advogado em Jaraguá do Sul/SC">                                                                                                                       
-      <meta property="og:description" content="Especialistas em Trabalhista, Previdenciário, Inventários e Civil em Santa Catarina. +4.000 clientes atendidos. Consulte pelo WhatsApp.">                        
+      <meta property="og:description" content="Advogado trabalhista, civil e previdenciário em Jaraguá do Sul/SC. +4.000 clientes atendidos. Fale pelo WhatsApp.">                        
       <meta property="og:image" content="https://advogadodefesa.com.br/src/img/CRUZ_SOCIAL_SITE.png">                                                                                                           
       <meta property="og:url" content="https://advogadodefesa.com.br/">                                                                                                                                         
       <meta property="og:type" content="website">                                                                                                                                                               
@@ -207,95 +206,109 @@
     body .whatsapp { display: flex !important; }
   }
 
-  /* ── Landscape mobile — ocultar seções pesadas e ajustar layout ─── */
-  @media (orientation: landscape) and (max-height: 540px) {
+  /* ── Landscape mobile — seletores ID para especificidade máxima ── */
+  @media (orientation: landscape) and (max-width: 932px) {
     .banner,
     #section_diferenciais,
     #section_contatos,
     .banner_depoimentos { display: none !important; }
 
-    body .section_home {
+    #section_home {
+      display: flex !important;
       flex-direction: row !important;
-      padding: 58px 5% 8px !important;
-      height: 100vh !important;
-      min-height: 0 !important;
-      overflow: hidden !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      box-sizing: border-box !important;
-    }
-
-    body .section_home .hero_bg_video {
-      position: absolute !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%,-50%) !important;
-      height: 100vh !important;
-      width: calc(100vh * 1.7419) !important;
-      max-width: none !important;
-      flex: none !important;
-      order: unset !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      opacity: 0.35 !important;
-      z-index: 1 !important;
-    }
-
-    body .section_home .hero_bg_overlay {
-      display: block !important;
-      position: absolute !important;
-      inset: 0 !important;
-      background: rgba(13,13,26,0.65) !important;
-      z-index: 2 !important;
-      pointer-events: none !important;
-    }
-
-    body .section_home .home_box {
-      position: relative !important;
-      z-index: 3 !important;
-      width: 100% !important;
-      max-width: 500px !important;
-      height: auto !important;
-      max-height: calc(100vh - 65px) !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: flex-start !important;
-      gap: 6px !important;
+      padding: 60px 5% 8px !important;
+      height: 100dvh !important;
       overflow: hidden !important;
-      flex: 1 1 auto !important;
+      box-sizing: border-box !important;
+      background: #0d0d1a !important;
     }
-
-    body .section_home .h1_hero {
+    #section_home .hero_bg_video {
+      position: absolute !important;
+      top: 0 !important; left: 0 !important;
+      transform: none !important;
+      width: 100% !important; height: 100% !important;
+      object-fit: cover !important; object-position: center !important;
+      flex: none !important; max-width: none !important;
+      border-radius: 0 !important; box-shadow: none !important;
+      opacity: .38 !important; z-index: 0 !important;
+      animation: none !important;
+    }
+    #section_home .hero_bg_overlay {
       display: block !important;
-      font-size: 1rem !important;
-      line-height: 1.35 !important;
-      margin: 0 !important;
+      position: absolute !important; inset: 0 !important;
+      background: rgba(13,13,26,.65) !important;
+      z-index: 1 !important; pointer-events: none !important;
     }
-
-    body .section_home .h1_linha {
+    #section_home .home_box {
+      position: relative !important; z-index: 2 !important;
+      display: flex !important; flex-direction: column !important;
+      align-items: flex-start !important; justify-content: center !important;
+      flex: 1 1 auto !important; width: auto !important;
+      max-width: 500px !important; height: 100% !important;
+      gap: 5px !important; overflow: hidden !important;
+    }
+    #section_home .h1_hero {
+      display: block !important;
+      font-size: 0.95rem !important; line-height: 1.25 !important;
+      margin: 0 !important; gap: 0 !important;
+    }
+    #section_home .h1_linha {
       display: inline !important;
-      opacity: 1 !important;
+      opacity: 1 !important; transform: none !important; animation: none !important;
     }
-
-    body .section_home .home_box h4 {
+    #section_home .home_box h4 {
       font-size: 0.72rem !important;
-      line-height: 1.35 !important;
-      margin: 0 !important;
+      line-height: 1.25 !important; margin: 0 !important;
     }
+    #section_home .home_box h5 { display: none !important; }
+    #section_home .home_box .btn_home { padding: 4px 12px !important; margin-top: 3px !important; }
+    #section_home .home_box .btn_home h4 { font-size: 0.72rem !important; }
+    #section_home .fa-angle-down { display: none !important; }
 
-    body .section_home .home_box h5 { display: none !important; }
-
-    body .section_home .home_box .btn_home {
-      padding: 5px 14px !important;
-      margin-top: 2px !important;
+    /* Seções abaixo do hero — scroll natural em landscape mobile */
+    body .section_sobre,
+    body .section_especialidades,
+    body .section_experiencia,
+    body .section_endereco,
+    body footer {
+      height: auto !important;
+      min-height: unset !important;
+      flex-direction: column !important;
+      padding: 68px 6% 40px !important;
     }
-
-    body .section_home .home_box .btn_home h4 {
-      font-size: 0.72rem !important;
+    /* Colunas internas — empilhar verticalmente */
+    .section_sobre .sobre_left,
+    .section_sobre .sobre_right,
+    .section_experiencia .experiencia_left,
+    .section_experiencia .experiencia_right,
+    .section_endereco .endereco_left,
+    .section_endereco .endereco_right,
+    .section_especialidades .especialidades_texts,
+    .section_especialidades .cards_grid {
+      width: 100% !important;
+      height: auto !important;
     }
+    /* Imagens nas seções — limitar altura para não ocupar tela inteira */
+    .section_sobre .sobre_right img,
+    .section_experiencia .experiencia_right img {
+      max-height: 200px !important;
+      width: auto !important;
+      object-fit: contain !important;
+    }
+    /* Rodapé — reduzir padding */
+    body footer { padding: 24px 6% !important; }
 
-    body .section_home .fa-angle-down { display: none !important; }
+    /* Btn mapa — fontes menores para caber na tela landscape */
+    .endereco_left .btn_mapa h4 { font-size: 1.2rem !important; }
+    .endereco_left .btn_mapa .mapa_bottom { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+    .endereco_left .btn_mapa .mapa_bottom h5 { width: 100% !important; font-size: 1rem !important; }
+    .section_endereco .endereco_right { display: none !important; }
+
+    /* WhatsApp FAB — reposicionar para não sobrepor botões */
+    body .whatsapp { bottom: 12px !important; right: 12px !important; width: 40px !important; height: 40px !important; border-radius: 10px !important; }
+    body .whatsapp i { font-size: 2rem !important; }
   }
 
   /* ── Transparência harmoniosa — vídeo e imagens ─────────────── */
@@ -354,12 +367,12 @@
       <section class="section_home" id="section_home">
           <video class="hero_bg_video" autoplay muted loop playsinline preload="metadata"
               poster="./src/img/hero_poster.jpg" aria-hidden="true">
-              <source src="./src/video/hero.webm" type="video/webm">
-              <source src="./src/video/hero.mp4" type="video/mp4">
+              <source src="./src/video/hero_v2.webm" type="video/webm">
+              <source src="./src/video/hero_v2.mp4" type="video/mp4">
           </video>
           <div class="hero_bg_overlay" aria-hidden="true"></div>
           <div class="home_box">                                                                                                                                                                                
-              <h1 class="h1_hero"><span class="h1_linha h1_l1">O Melhor Advogado</span><span class="h1_linha h1_l2">é aquele que apresenta soluções jurídicas</span><span class="h1_linha h1_l3">com excelência e dedicação</span><span class="h1_linha h1_l4 h1_cta">e resolve o seu problema.</span></h1>
+              <h1 class="h1_hero"><span class="h1_linha h1_l1">Advogado em</span><span class="h1_linha h1_l2">Jaraguá do Sul — Trabalhista,</span><span class="h1_linha h1_l3">Civil e Previdenciário</span><span class="h1_linha h1_l4 h1_cta">Defesa dos seus direitos.</span></h1>
               <h4>Buscar seu direito é nosso trabalho, com advogados especialistas em diversas áreas</h4>                                                     
               <h5>                                                                                                                                                                                              
                   • Direito Trabalhista<br>                                                                                                                                                                     
@@ -545,15 +558,15 @@
               <br>
               <div class="exp_infos">                                                                                                                                                                           
                   <div class="exp_info">                                                                                                                                                                        
-                      <h1><span class="counter" data-target="4000" data-prefix="+" data-suffix="">+4.000</span></h1>
+                      <p class="counter_number"><span class="counter" data-target="4000" data-prefix="+" data-suffix="">+4.000</span></p>
                       <h4>clientes atendidos</h4>                                                                                                                                                               
                   </div>                                                                                                                                                                                        
                   <div class="exp_info">
-                      <h1><span class="counter" data-target="4000" data-prefix="+" data-suffix="">+4.000</span></h1>
+                      <p class="counter_number"><span class="counter" data-target="4000" data-prefix="+" data-suffix="">+4.000</span></p>
                       <h4>casos solucionados</h4>                                                                                                                                                               
                   </div>
                   <div class="exp_info">                                                                                                                                                                        
-                      <h1><span class="counter" data-target="15000000" data-prefix="+ R$ " data-suffix="">+ R$ 15.000.000</span></h1>
+                      <p class="counter_number"><span class="counter" data-target="15000000" data-prefix="+ R$ " data-suffix="">+ R$ 15.000.000</span></p>
                       <h4>em valores ganhos a favor de nossos clientes</h4>                                                                                                                                     
                   </div>                                                                                                                                                                                        
               </div>                                                                                                                                                                                            

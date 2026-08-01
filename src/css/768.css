@@ -1097,7 +1097,7 @@
 }
 
 /* ── LANDSCAPE MOBILE — fora do bloco max-width, query combinada válida ── */
-@media (max-width: 768px) and (orientation: landscape) and (max-height: 540px) {
+@media (max-width: 768px) and (orientation: landscape) {
 
     body .section_home {
         flex-direction: row !important;

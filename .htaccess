@@ -27,17 +27,33 @@ Redirect 301 /mapa https://maps.google.com/?q=-26.4939913,-49.0811204
     Header unset X-Powered-By
 </IfModule>
 
-# ── Cache — sem cache para CSS/JS (evita CDN servir versão antiga) ────────────
+# ── Cache — sem cache para HTML/PHP/CSS/JS ────────────────────────────────────
 <IfModule mod_headers.c>
+    # PHP/HTML: nunca cachear (garante CSS e vídeos atualizados)
+    <FilesMatch "\.(php|html|htm)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate"
+        Header unset ETag
+        Header unset Last-Modified
+        Header unset Pragma
+    </FilesMatch>
+    # CSS/JS: sem cache
     <FilesMatch "\.(css|js)$">
-        Header set Cache-Control "no-cache, must-revalidate"
+        Header set Cache-Control "no-store, no-cache, must-revalidate"
         Header unset ETag
         Header unset Last-Modified
     </FilesMatch>
+    # Vídeos: cache longo (nomes versionados controlam atualização)
+    <FilesMatch "\.(mp4|webm)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
 </IfModule>
 <IfModule mod_expires.c>
-    <FilesMatch "\.(css|js)$">
+    <FilesMatch "\.(css|js|php|html)$">
         ExpiresActive Off
+    </FilesMatch>
+    <FilesMatch "\.(mp4|webm)$">
+        ExpiresActive On
+        ExpiresDefault "access plus 1 year"
     </FilesMatch>
 </IfModule>
 

@@ -18,7 +18,7 @@ if($url=="INDEX"){
     $html = ob_get_clean();
 
     // Injeta patch CSS compartilhado antes do </head>
-    $patch = '<link rel="stylesheet" href="/src/css/patch.css">';
+    $patch = '<link rel="stylesheet" href="/src/css/patch.css?v=' . date('dmYhms') . '">';
 
     echo str_replace('</head>', $patch . '</head>', $html);
 }

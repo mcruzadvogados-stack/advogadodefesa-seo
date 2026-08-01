@@ -101,3 +101,24 @@ window.addEventListener('resize', applyMobileVisibility, { passive: true });
 
     document.querySelectorAll('.counter').forEach(el => observer.observe(el));
 })();
+
+// ── Vídeo hero — orientação responsiva ───────────────────────────
+function setHeroVideoOrientation() {
+    const video = document.querySelector('.hero_bg_video');
+    if (!video) return;
+    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+    const sources    = video.querySelectorAll('source');
+    if (!sources.length) return;
+    const currentSrc = sources[0].getAttribute('src') || '';
+    const alreadySet = isPortrait
+        ? currentSrc.includes('_vertical')
+        : !currentSrc.includes('_vertical');
+    if (alreadySet) return;
+    const base = isPortrait ? './src/video/hero_vertical_v2' : './src/video/hero_v2';
+    sources[0].setAttribute('src', base + '.webm');
+    sources[1].setAttribute('src', base + '.mp4');
+    video.load();
+}
+
+setHeroVideoOrientation();
+window.matchMedia('(orientation: portrait)').addEventListener('change', setHeroVideoOrientation);

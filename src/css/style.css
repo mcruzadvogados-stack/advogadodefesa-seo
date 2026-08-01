@@ -285,39 +285,50 @@ body .section_home{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 10%;
+    justify-content: center;
+    padding: 0;
 }
 
 .hero_bg_video {
-    /* Desktop: flex item à direita do texto */
-    position: relative;
-    order: 2;
-    flex: 1.5;
-    max-width: 700px;
-    align-self: center;
-    border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(0,0,0,.55);
-    opacity: .40;
-    z-index: 2;
-    pointer-events: none;
+    /* Desktop: fullscreen absoluto atrás do conteúdo */
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    flex: none;
+    order: unset;
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: .55;
+    z-index: 0;
+    pointer-events: none;
     animation: heroSlideUp .8s .5s cubic-bezier(.22,1,.36,1) both;
 }
 .hero_bg_overlay {
-    display: none; /* overlay não necessário no desktop com video ao lado */
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: rgba(13,13,26,.55);
+    z-index: 1;
+    pointer-events: none;
 }
 .section_home .home_box {
-    order: 1;
     position: relative;
     z-index: 2;
+    order: unset;
 }
 .section_home .home_box{
-    width: 40%;
-    height: 100%;
+    flex: 0 0 auto;
+    width: 55%;
+    max-width: 700px;
+    height: auto;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: center;
     gap: 30px;
 }
@@ -1227,7 +1238,7 @@ footer .footer_bottom{
 
 
 /* ── MOBILE LANDSCAPE — max-height cobre todos os phones girados ────── */
-@media (max-height: 500px) {
+@media (orientation: landscape) and (max-width: 932px) {
     body .section_home {
         flex-direction: row !important;
         align-items: center !important;
