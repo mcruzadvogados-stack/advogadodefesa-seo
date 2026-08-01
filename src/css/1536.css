@@ -234,13 +234,14 @@
     /* SECTION ESPECIALIDADES ----------------------------------------------------------------------------------*/
     body .section_especialidades{
         width: 100vw;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
         background-color: #252525;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 120px 5% 50px 5%;
+        padding: 80px 5%;
         gap: 20px;
     }
     .section_especialidades .especialidades_texts{

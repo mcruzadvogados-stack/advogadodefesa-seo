@@ -1,7 +1,7 @@
 Options -Indexes
 
 # Redirecionar /mapa → Google Maps do escritório (antes de qualquer rewrite)
-Redirect 301 /mapa https://maps.google.com/?q=Cruz+Advocacia+Advogado+de+Defesa+Jaragua+do+Sul+SC
+Redirect 301 /mapa https://maps.google.com/?q=-26.4939913,-49.0811204
 
 # ── Security Headers ──────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
@@ -48,7 +48,7 @@ RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
 # Redirecionar /mapa → Google Maps do escritório
-RewriteRule ^mapa/?$ https://maps.google.com/?q=Cruz+Advocacia+Advogado+de+Defesa+Jaragua+do+Sul+SC [R=301,L]
+RewriteRule ^mapa/?$ https://maps.google.com/?q=-26.4939913,-49.0811204 [R=301,L]
 
 # Servir arquivos PHP reais diretamente (subpáginas com SEO)
 RewriteCond %{REQUEST_FILENAME} -f

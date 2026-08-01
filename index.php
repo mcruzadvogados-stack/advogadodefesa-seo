@@ -17,18 +17,8 @@ if($url=="INDEX"){
     require_once "src/pages/index.php";
     $html = ob_get_clean();
 
-    // Injeta correções de CSS antes do </head>
-    $patch = '<style id="css-patch">
-/* Transparência harmoniosa */
-.hero_bg_video{opacity:.40!important}
-.sobre_right img,.experiencia_right img{opacity:.60!important;transition:opacity 300ms ease}
-.card img{opacity:.60!important;transition:opacity 300ms ease}
-/* Hover — todas as imagens voltam a 100% */
-.sobre_right:hover img,.experiencia_right:hover img{opacity:1!important}
-.card:hover img{opacity:1!important}
-/* Seção especialidades — padding simétrico, altura adaptável */
-body .section_especialidades{height:auto!important;min-height:100vh!important;padding:80px 10%!important}
-</style>';
+    // Injeta patch CSS compartilhado antes do </head>
+    $patch = '<link rel="stylesheet" href="/src/css/patch.css">';
 
     echo str_replace('</head>', $patch . '</head>', $html);
 }

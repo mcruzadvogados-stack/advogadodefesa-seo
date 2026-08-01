@@ -1,0 +1,49 @@
+/* ── CRUZ Advocacia — Patch CSS (main + subpages) ─────────────────── */
+
+/* Transparência harmoniosa */
+.hero_bg_video{opacity:.40!important}
+.sobre_right img,.experiencia_right img{opacity:.60!important;transition:opacity 300ms ease}
+.card img{opacity:.60!important;transition:opacity 300ms ease}
+/* Hover — todas as imagens voltam a 100% */
+.sobre_right:hover img,.experiencia_right:hover img{opacity:1!important}
+.card:hover img{opacity:1!important}
+
+/* Seção especialidades — padding simétrico, altura adaptável */
+body .section_especialidades{height:auto!important;min-height:100vh!important;padding:80px 10%!important}
+
+/* Caixa "Abrir localização no mapa" — fundo caramelo */
+.endereco_left .btn_mapa{background:linear-gradient(#d4b87a,#c8a96e)!important}
+
+/* Botões do rodapé — tamanho e cor dos SVGs */
+.footer_tright .btn_footer svg{width:2rem;height:2rem;fill:#fff!important;display:block}
+/* Cores de marca */
+.btn_footer[aria-label*="Facebook"]{background:#1877F2!important;border-color:#1877F2!important}
+.btn_footer[aria-label*="Instagram"]{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)!important;border-color:#dc2743!important}
+.btn_footer[aria-label*="WhatsApp"]{background:#25d366!important;border-color:#25d366!important}
+.btn_footer[aria-label*="Consulta"]{background:#c8a96e!important;border-color:#c8a96e!important}
+.btn_footer[aria-label*="processo"]{background:#c8a96e!important;border-color:#c8a96e!important}
+.btn_footer[aria-label*="chegar"]{background:#c8a96e!important;border-color:#c8a96e!important}
+
+/* Hover verde — botões de CTA principais */
+a.nav_button:hover,a.btn_home:hover{background:#25d366!important;color:#fff!important;border-color:#25d366!important}
+a.nav_button:hover *,a.btn_home:hover *{color:#fff!important}
+
+/* Hover verde WhatsApp — botões visíveis (main + subpages) */
+a.whatsapp:hover,
+a.btn_especialidades[href*="whatsapp"]:hover,
+a.btn_action[href*="whatsapp"]:hover,
+a.btn_footer[href*="whatsapp"]:hover,
+a.btn_wpp_hero:hover,
+a.btn_wpp_cta:hover,
+a[class*="btn_wpp"]:hover{background:#25d366!important;color:#fff!important;border-color:#25d366!important}
+a.whatsapp:hover *,
+a.btn_especialidades[href*="whatsapp"]:hover *,
+a.btn_action[href*="whatsapp"]:hover *,
+a.btn_footer[href*="whatsapp"]:hover *,
+a.btn_wpp_hero:hover *,
+a.btn_wpp_cta:hover *,
+a[class*="btn_wpp"]:hover *{color:#fff!important}
+
+/* Cards hover */
+.card_body:hover .btn_card{background:#25d366!important;color:#fff!important}
+.card_body:hover .btn_card *{color:#fff!important}

@@ -13,6 +13,19 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 ALLOWED=(
     "index.php"
     "src/pages/index.php"
+    "trabalhista.php"
+    "previdenciario.php"
+    "civil.php"
+    "criminal.php"
+    "bancario.php"
+    "inventario.php"
+    "contato.php"
+    "seo_global.php"
+    "seo_global.js"
+    "robots.txt"
+    "sitemap.xml"
+    "google_ping.php"
+    "google_site_verification.php"
     "src/css/style.css"
     "src/css/430.css"
     "src/css/640.css"
@@ -100,3 +113,29 @@ for file in "${FILES[@]}"; do
 done
 
 echo "=== Concluído ==="
+
+# ── Ping automático ao Google após deploy ────────────────────────────────────
+echo ""
+echo "=== Google & IndexNow Ping ==="
+SITEMAP_URL="https://advogadodefesa.com.br/sitemap.xml"
+
+# Google descontinuou o endpoint ping em 2023.
+# Indexação Google via Search Console (automática após verificação da propriedade).
+echo "  → Google: indexação via Search Console (automático após verificação)"
+
+# IndexNow para Bing
+INDEXNOW_KEY="2068054de8e846ceba7ce1dd561f5546"
+INDEXNOW_PAYLOAD='{"host":"advogadodefesa.com.br","key":"'${INDEXNOW_KEY}'","keyLocation":"https://advogadodefesa.com.br/'${INDEXNOW_KEY}'.txt","urlList":["https://advogadodefesa.com.br/","https://advogadodefesa.com.br/trabalhista","https://advogadodefesa.com.br/previdenciario","https://advogadodefesa.com.br/civil","https://advogadodefesa.com.br/criminal","https://advogadodefesa.com.br/bancario","https://advogadodefesa.com.br/inventario","https://advogadodefesa.com.br/contato"]}'
+
+BING_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+    "https://api.indexnow.org/indexnow" \
+    -H "Content-Type: application/json" \
+    -d "$INDEXNOW_PAYLOAD" \
+    --max-time 10)
+if [ "$BING_STATUS" = "200" ] || [ "$BING_STATUS" = "202" ]; then
+    echo "  ✓ IndexNow (Bing): OK"
+else
+    echo "  ✗ IndexNow (Bing): HTTP $BING_STATUS"
+fi
+
+echo "=== SEO Pings Concluídos ==="
