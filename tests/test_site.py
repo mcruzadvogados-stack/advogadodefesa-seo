@@ -7,16 +7,29 @@ Rodar: python3 tests/test_site.py
 import unittest
 import re
 import os
+from contextlib import contextmanager
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-def read(path):
-    return open(os.path.join(ROOT, path), encoding='utf-8').read()
 
 SUBPAGES = [
     'trabalhista.php', 'civil.php', 'criminal.php', 'bancario.php',
     'previdenciario.php', 'inventario.php', 'contato.php',
 ]
+
+
+@contextmanager
+def open_file(path):
+    """Abre arquivo garantindo fechamento após uso."""
+    f = open(os.path.join(ROOT, path), encoding='utf-8')
+    try:
+        yield f.read()
+    finally:
+        f.close()
+
+
+def read(path):
+    with open_file(path) as content:
+        return content
 
 
 # ── Patch CSS ────────────────────────────────────────────────────────────────
@@ -53,9 +66,9 @@ class TestPatchCSS(unittest.TestCase):
         self.assertIn('fill:#fff', self.css)
 
     def test_footer_brand_colors(self):
-        self.assertIn('#1877F2', self.css)           # Facebook
-        self.assertIn('#dc2743', self.css)           # Instagram
-        self.assertIn('#25d366', self.css)           # WhatsApp
+        self.assertIn('#1877F2', self.css)   # Facebook
+        self.assertIn('#dc2743', self.css)   # Instagram
+        self.assertIn('#25d366', self.css)   # WhatsApp
 
     def test_hover_green_nav_button(self):
         self.assertIn('a.nav_button:hover', self.css)
@@ -116,7 +129,6 @@ class TestMainPage(unittest.TestCase):
         self.assertNotIn('fa-facebook-f', self.html)
 
     def _footer_section(self):
-        """Extrai apenas o bloco footer_tright do HTML."""
         m = re.search(r'footer_tright.*?</div>', self.html, re.DOTALL)
         return m.group(0) if m else ''
 
@@ -146,7 +158,6 @@ class TestMainPage(unittest.TestCase):
         self.assertNotIn('fa-map-location-dot', footer)
 
     def test_btn_mapa_color_green_original(self):
-        # Botão ABRIR MAPA usa verde original (#1ea73c)
         self.assertIn('--var:#1ea73c', self.html)
 
     def test_scripts_loaded(self):
@@ -180,8 +191,6 @@ class TestSubpages(unittest.TestCase):
             self.assertNotIn('fa-instagram', content)
 
         with self.subTest(file=fname, check='svg whatsapp footer no fa class'):
-            # fa-whatsapp pode aparecer em outros contextos (header do CMS)
-            # mas não deve estar nos btn_footer do rodapé
             footer_section = re.search(
                 r'footer_tright.*?</div>', content, re.DOTALL)
             if footer_section:
@@ -219,7 +228,7 @@ class TestHtaccess(unittest.TestCase):
 # ── WhatsApp Widget (wpp-widget.js) ──────────────────────────────────────────
 
 class TestWppWidget(unittest.TestCase):
-    """Widget WhatsApp deve ter SVG, pulso e timer de inatividade."""
+    """Widget WhatsApp deve ter SVG, pulso, timer de inatividade e fluxo correto."""
 
     def setUp(self):
         self.js = read('src/js/wpp-widget.js')
@@ -239,9 +248,11 @@ class TestWppWidget(unittest.TestCase):
         self.assertIn('wppPulse', self.js)
         self.assertIn('border-radius:50%', self.js)
 
-    def test_inactivity_timer_4000ms(self):
+    def test_inactivity_timer_constant_exists(self):
         self.assertIn('INACTIVITY_MS', self.js)
-        self.assertIn('4000', self.js)
+
+    def test_inactivity_timer_is_8000ms(self):
+        self.assertIn('INACTIVITY_MS  = 8000', self.js)
 
     def test_panel_closes_on_inactivity(self):
         self.assertIn('closePanel', self.js)
@@ -260,6 +271,44 @@ class TestWppWidget(unittest.TestCase):
     def test_whatsapp_url_built_from_answers(self):
         self.assertIn('buildWhatsAppUrl', self.js)
         self.assertIn('api.whatsapp.com', self.js)
+
+    def test_whatsapp_url_encodes_text(self):
+        self.assertIn('encodeURIComponent', self.js)
+
+    def test_conversation_areas_defined(self):
+        self.assertIn('Trabalhista', self.js)
+        self.assertIn('Previdenciário', self.js)
+        self.assertIn('Criminal', self.js)
+
+    def test_conversation_asks_timeframe(self):
+        self.assertIn('askTimeframe', self.js)
+        self.assertIn('Menos de 1 mês', self.js)
+
+    def test_closing_message_urgency(self):
+        self.assertIn('prazo legal', self.js)
+
+    def test_panel_auto_closes_after_whatsapp_click(self):
+        self.assertIn('closePanel(panel)', self.js)
+        self.assertIn('3000', self.js)
+
+    def test_no_dead_code_inject_animation_style(self):
+        """injectAnimationStyle não deve existir — era no-op removido."""
+        self.assertNotIn('injectAnimationStyle', self.js)
+
+    def test_use_strict(self):
+        self.assertIn("'use strict'", self.js)
+
+    def test_iife_pattern(self):
+        self.assertIn('(function WhatsAppWidget()', self.js)
+
+    def test_report_includes_area(self):
+        self.assertIn('answers.area', self.js)
+
+    def test_report_includes_detail(self):
+        self.assertIn('answers.detalhe', self.js)
+
+    def test_report_includes_timeframe(self):
+        self.assertIn('answers.tempo', self.js)
 
 
 # ── script.js ────────────────────────────────────────────────────────────────
@@ -296,6 +345,13 @@ class TestScriptJS(unittest.TestCase):
     def test_use_strict(self):
         self.assertIn("'use strict'", self.js)
 
+    def test_hero_video_orientation(self):
+        self.assertIn('setHeroVideoOrientation', self.js)
+        self.assertIn('orientation: portrait', self.js)
+
+    def test_passive_event_listeners(self):
+        self.assertIn('passive: true', self.js)
+
 
 # ── deploy.sh ────────────────────────────────────────────────────────────────
 
@@ -322,8 +378,6 @@ class TestDeployScript(unittest.TestCase):
         self.assertIn('"index.php"', self.sh)
 
     def test_deploy_patch_css_or_explicit(self):
-        # patch.css é deployado explicitamente (não está no ALLOWED padrão)
-        # mas o script suporta argumentos livres
         self.assertIn('FILES=("$@")', self.sh)
 
 

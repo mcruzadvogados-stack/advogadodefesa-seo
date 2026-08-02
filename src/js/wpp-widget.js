@@ -185,7 +185,6 @@
         new MutationObserver(() => {
             if (panel.style.display !== 'none' && !started) {
                 started = true;
-                injectAnimationStyle();
                 startConversationFlow(msgArea, btnArea, panel);
             }
         }).observe(panel, { attributes: true, attributeFilter: ['style'] });
@@ -284,6 +283,7 @@
         }); });
     }
 
+
     // ── UI helpers ────────────────────────────────────────────────
     function showTypingIndicator(msgArea, callback) {
         const wrap = createElement('div',
@@ -373,9 +373,5 @@
     function scrollToBottom(container) {
         container.scrollTop = container.scrollHeight;
     }
-
-    // Estilos já injetados em injectWidgetStyles() no init — esta função é mantida
-    // apenas para compatibilidade com a chamada em startConversationFlow.
-    function injectAnimationStyle() { /* no-op: styles injected at init */ }
 
 })();
