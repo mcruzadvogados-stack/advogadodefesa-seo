@@ -1,0 +1,27 @@
+{
+  "name": "CRUZ Advocacia — Jaraguá do Sul/SC",
+  "short_name": "CRUZ Advocacia",
+  "description": "Advogado trabalhista, civil e previdenciário em Jaraguá do Sul/SC. +4.000 clientes atendidos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/ICON.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/ICON.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "categories": ["legal", "business"],
+  "shortcuts": [
+    {
+      "name": "Falar pelo WhatsApp",
+      "url": "https://api.whatsapp.com/send?phone=554732731422&text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20um%20advogado.",
+      "description": "Atendimento direto via WhatsApp"
+    },
+    {
+      "name": "Como chegar",
+      "url": "/mapa",
+      "description": "Localização do escritório no Maps"
+    }
+  ]
+}

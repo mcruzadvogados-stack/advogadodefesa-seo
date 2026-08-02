@@ -1,5 +1,20 @@
 Options -Indexes
 
+# ── Página de erro customizada ────────────────────────────────────────────────
+ErrorDocument 404 /404.php
+ErrorDocument 500 /404.php
+
+# ── Compressão gzip (mod_deflate) ────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/json application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE image/svg+xml font/woff font/woff2 application/font-woff application/font-woff2
+    # Não comprimir arquivos já comprimidos
+    SetEnvIfNoCase Request_URI \.(gif|jpe?g|png|webp|mp4|webm|zip|gz)$ no-gzip
+    Header append Vary Accept-Encoding env=!no-gzip
+</IfModule>
+
 # Redirecionar /mapa → Google Maps do escritório (antes de qualquer rewrite)
 Redirect 301 /mapa https://maps.google.com/?q=-26.4939913,-49.0811204
 
@@ -21,7 +36,7 @@ Redirect 301 /mapa https://maps.google.com/?q=-26.4939913,-49.0811204
     Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
 
     # Content Security Policy
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://maps.gstatic.com https://maps.googleapis.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; frame-src https://www.google.com https://maps.google.com.br; object-src 'none'; base-uri 'self';"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com https://connect.facebook.net https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://maps.gstatic.com https://maps.googleapis.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://ka-f.fontawesome.com; frame-src https://www.google.com https://maps.google.com https://maps.google.com.br; object-src 'none'; base-uri 'self';"
 
     # Remover header X-Powered-By
     Header unset X-Powered-By
@@ -44,6 +59,10 @@ Redirect 301 /mapa https://maps.google.com/?q=-26.4939913,-49.0811204
     </FilesMatch>
     # Vídeos: cache longo (nomes versionados controlam atualização)
     <FilesMatch "\.(mp4|webm)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # Imagens e fontes: cache 1 ano (nomes estáticos — não mudam)
+    <FilesMatch "\.(png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
 </IfModule>

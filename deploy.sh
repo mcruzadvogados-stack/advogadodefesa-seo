@@ -34,6 +34,12 @@ ALLOWED=(
     "src/css/1280.css"
     "src/css/1536.css"
     "src/css/1630.css"
+    "src/css/patch.css"
+    "src/js/script.js"
+    "src/js/wpp-widget.js"
+    ".htaccess"
+    "manifest.json"
+    "404.php"
 )
 
 # Obtém credenciais TUS da API Hostinger

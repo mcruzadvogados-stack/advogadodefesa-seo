@@ -104,12 +104,27 @@
       }
       </script>                                                                                                                                                                                                 
                                                                   
-      <!-- Preconnect -->
+      <!-- Web App Manifest + PWA -->
+      <link rel="manifest" href="/manifest.json">
+      <meta name="theme-color" content="#1a1a2e">
+      <link rel="apple-touch-icon" href="/ICON.png">
+
+      <!-- hreflang -->
+      <link rel="alternate" hreflang="pt-BR" href="https://advogadodefesa.com.br/">
+      <link rel="alternate" hreflang="x-default" href="https://advogadodefesa.com.br/">
+
+      <!-- Preload crítico -->
+      <link rel="preload" as="image" href="./src/img/hero_poster.jpg">
+
+      <!-- Preconnect — Google Fonts, Analytics, FontAwesome -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
-      <link rel="preconnect" href="https://code.jquery.com" crossorigin>                                                                                                                                        
       <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-                                                                                                                                                                                                                
-      <!-- Google Analytics 4 -->                                 
+      <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+      <link rel="dns-prefetch" href="https://ka-f.fontawesome.com">
+
+            <!-- Google Analytics 4 -->                                 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCK20HDPPC"></script>                                                                                                                    
       <script>                                                                                                                                                                                                  
           window.dataLayer = window.dataLayer || [];
@@ -327,11 +342,22 @@
       {"@context":"https://schema.org","@type":"WebSite","name":"CRUZ Advocacia","url":"https://advogadodefesa.com.br","potentialAction":{"@type":"SearchAction","target":"https://advogadodefesa.com.br/?s={search_term_string}","query-input":"required name=search_term_string"}}
       </script>
       <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como escolher o melhor advogado?","acceptedAnswer":{"@type":"Answer","text":"O melhor advogado é aquele que resolve o seu problema com eficiência, transparência e dentro do prazo. Na CRUZ Advocacia atendemos mais de 4.000 clientes com mais de R$ 12,5 milhões recuperados."}},{"@type":"Question","name":"Qual advogado é referência em Jagaruá do Sul/SC?","acceptedAnswer":{"@type":"Answer","text":"A CRUZ Advocacia é referência em Jagaruá do Sul/SC nas áreas Trabalhista, Previdenciária, Civil, Bancária e Criminal, com mais de 4.000 casos solucionados e R$ 12,5 milhões recuperados para nossos clientes."}},{"@type":"Question","name":"O que diferencia um bom advogado?","acceptedAnswer":{"@type":"Answer","text":"Um bom advogado une conhecimento técnico, comunicação clara e eficiência na resolução de conflitos. Resultado é o único parâmetro que importa."}}]}
+      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como escolher o melhor advogado?","acceptedAnswer":{"@type":"Answer","text":"O melhor advogado é aquele que resolve o seu problema com eficiência, transparência e dentro do prazo. Na CRUZ Advocacia atendemos mais de 4.000 clientes com mais de R$ 12,5 milhões recuperados."}},{"@type":"Question","name":"Qual advogado é referência em Jaraguá do Sul/SC?","acceptedAnswer":{"@type":"Answer","text":"A CRUZ Advocacia é referência em Jaraguá do Sul/SC nas áreas Trabalhista, Previdenciária, Civil, Bancária e Criminal, com mais de 4.000 casos solucionados e R$ 12,5 milhões recuperados para nossos clientes."}},{"@type":"Question","name":"O que diferencia um bom advogado?","acceptedAnswer":{"@type":"Answer","text":"Um bom advogado une conhecimento técnico, comunicação clara e eficiência na resolução de conflitos. Resultado é o único parâmetro que importa."}}]}
       </script>
+
+      <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://advogadodefesa.com.br/"},{"@type":"ListItem","position":2,"name":"Trabalhista","item":"https://advogadodefesa.com.br/trabalhista"},{"@type":"ListItem","position":3,"name":"Previdenciário","item":"https://advogadodefesa.com.br/previdenciario"},{"@type":"ListItem","position":4,"name":"Civil","item":"https://advogadodefesa.com.br/civil"},{"@type":"ListItem","position":5,"name":"Criminal","item":"https://advogadodefesa.com.br/criminal"},{"@type":"ListItem","position":6,"name":"Inventário","item":"https://advogadodefesa.com.br/inventario"},{"@type":"ListItem","position":7,"name":"Contato","item":"https://advogadodefesa.com.br/contato"}]}
+      </script>
+
+      <!-- Skip Navigation (acessibilidade) -->
+      <style>
+        .skip-nav{position:absolute;top:-100px;left:0;background:#c8a96e;color:#1a1a2e;padding:8px 16px;font-weight:700;z-index:999999;text-decoration:none;border-radius:0 0 6px 0;transition:top .15s}
+        .skip-nav:focus{top:0}
+      </style>
   </head>                                                                                                                                                                                                       
                                                                   
-  <body class="<?php echo $dark_mode ?>">                                                                                                                                                                       
+  <body class="<?php echo $dark_mode ?>">
+      <a href="#section_home" class="skip-nav">Pular para o conteúdo principal</a>                                                                                                                                                                       
                                                                   
       <!-- AUTOLOAD S7VEN -->                                                                                                                                                                                   
       <?php include('./autoload_seven.php'); ?>                   

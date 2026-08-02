@@ -182,14 +182,18 @@
               </div>                                                                                                                                                                                            
           </div>
                                                                                                                                                                                                                 
-          <div class="contato_form_box">                          
+          <div class="contato_form_box">
               <h2>Envie uma mensagem</h2>
-              <input type="email" placeholder="Seu melhor e-mail"                            autocomplete="email">                                                                                              
-              <input type="text"  placeholder="Seu nome completo"                            autocomplete="name">                                                                                               
-              <input type="tel"   placeholder="Seu contato com DDD"                          autocomplete="tel">                                                                                                
-              <input type="text"  placeholder="Assunto (ex: Trabalhista, INSS, Inventário)"  autocomplete="off">                                                                                                
-              <textarea placeholder="Descreva brevemente sua situação..."></textarea>                                                                                                                           
-              <button class="btn_submit" type="button">ENVIAR MENSAGEM</button>                                                                                                                                 
+              <form id="contato_form" novalidate>
+                <!-- Honeypot anti-spam (deve ficar vazio) -->
+                <input type="text" name="website" id="form_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none!important;visibility:hidden!important;position:absolute!important;left:-9999px!important;">
+                <input type="email" id="form_email"   placeholder="Seu melhor e-mail *"                           autocomplete="email" required>
+                <input type="text"  id="form_nome"    placeholder="Seu nome completo *"                           autocomplete="name"  required>
+                <input type="tel"   id="form_tel"     placeholder="Seu contato com DDD *"                         autocomplete="tel"   required>
+                <input type="text"  id="form_assunto" placeholder="Assunto (ex: Trabalhista, INSS, Inventário)"   autocomplete="off">
+                <textarea           id="form_msg"     placeholder="Descreva brevemente sua situação..."></textarea>
+                <button class="btn_submit" type="submit">ENVIAR MENSAGEM</button>
+              </form>
           </div>                                                                                                                                                                                                
       </div>                                                      
                                                                                                                                                                                                                 
