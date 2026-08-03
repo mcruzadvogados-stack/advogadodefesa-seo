@@ -36,6 +36,7 @@ ALLOWED=(
     "src/css/1630.css"
     "src/css/patch.css"
     "src/js/script.js"
+    "src/js/pages.js"
     "src/js/wpp-widget.js"
     ".htaccess"
     "manifest.json"
